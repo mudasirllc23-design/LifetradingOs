@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life & Trading Performance OS</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===================== PIN LOCK SCREEN ===================== -->
+  <div class="pin-lock-screen" id="pinLockScreen">
+    <div class="pin-lock-card">
+
+      <!-- Logo -->
+      <div class="pin-lock-logo">
+        <div class="pin-logo-icon">
+          <svg width="32" height="32" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="2" width="10" height="10" rx="2" fill="white" opacity="0.9"/>
+            <rect x="16" y="2" width="10" height="10" rx="2" fill="white" opacity="0.6"/>
+            <rect x="2" y="16" width="10" height="10" rx="2" fill="white" opacity="0.6"/>
+            <rect x="16" y="16" width="10" height="10" rx="2" fill="white" opacity="0.9"/>
+          </svg>
+        </div>
+        <h1 class="pin-lock-title">LifeOS</h1>
+        <p class="pin-lock-subtitle">Performance System</p>
+      </div>
+
+      <!-- Lock icon -->
+      <div class="pin-lock-icon" id="pinLockIcon">🔒</div>
+
+      <!-- Mode label -->
+      <p class="pin-mode-label" id="pinModeLabel">Enter PIN to unlock</p>
+
+      <!-- PIN dots -->
+      <div class="pin-dots" id="pinDots">
+        <div class="pin-dot" id="dot0"></div>
+        <div class="pin-dot" id="dot1"></div>
+        <div class="pin-dot" id="dot2"></div>
+        <div class="pin-dot" id="dot3"></div>
+      </div>
+
+      <!-- Error message -->
+      <div class="pin-error" id="pinError"></div>
+
+      <!-- Number pad -->
+      <div class="pin-pad" id="pinPad">
+        <button class="pin-key" data-key="1">1</button>
+        <button class="pin-key" data-key="2">2</button>
+        <button class="pin-key" data-key="3">3</button>
+        <button class="pin-key" data-key="4">4</button>
+        <button class="pin-key" data-key="5">5</button>
+        <button class="pin-key" data-key="6">6</button>
+        <button class="pin-key" data-key="7">7</button>
+        <button class="pin-key" data-key="8">8</button>
+        <button class="pin-key" data-key="9">9</button>
+        <button class="pin-key pin-key-clear" data-key="clear">✕</button>
+        <button class="pin-key" data-key="0">0</button>
+        <button class="pin-key pin-key-del" data-key="del">⌫</button>
+      </div>
+
+      <!-- Setup mode hint -->
+      <p class="pin-hint" id="pinHint"></p>
+
+      <!-- First time / forgot PIN -->
+      <button class="pin-forgot-btn" id="pinForgotBtn" style="display:none">Forgot PIN? Reset App Lock</button>
+
+    </div>
+  </div>
+  <!-- ===================== END PIN LOCK ===================== -->
+
+  <!-- MOBILE OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- SIDEBAR NAV -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect x="2" y="2" width="10" height="10" rx="2" fill="var(--accent)"/>
+          <rect x="16" y="2" width="10" height="10" rx="2" fill="var(--accent2)" opacity="0.7"/>
+          <rect x="2" y="16" width="10" height="10" rx="2" fill="var(--accent2)" opacity="0.7"/>
+          <rect x="16" y="16" width="10" height="10" rx="2" fill="var(--accent)"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">LifeOS</span>
+        <span class="brand-sub">Performance System</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Core</div>
+
+      <a href="#" class="nav-item active" data-page="dashboard">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+          </svg>
+        </span>
+        <span class="nav-label">Dashboard</span>
+      </a>
+
+      <a href="#" class="nav-item" data-page="habits">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+          </svg>
+        </span>
+        <span class="nav-label">Habit Tracker</span>
+        <span class="nav-badge" id="habitBadge">0</span>
+      </a>
+
+      <a href="#" class="nav-item" data-page="forex">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
+          </svg>
+        </span>
+        <span class="nav-label">Forex Journal</span>
+      </a>
+
+      <a href="#" class="nav-item" data-page="rules">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </span>
+        <span class="nav-label">Trading Rules</span>
+        <span class="nav-badge" id="ruleBreakBadge" style="display:none">!</span>
+      </a>
+
+      <a href="#" class="nav-item" data-page="goals">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+          </svg>
+        </span>
+        <span class="nav-label">Goals</span>
+      </a>
+
+      <div class="nav-section-label">Mind & Body</div>
+
+      <a href="#" class="nav-item" data-page="reflection">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14z"/>
+            <path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"/>
+          </svg>
+        </span>
+        <span class="nav-label">Reflection</span>
+      </a>
+
+      <a href="#" class="nav-item" data-page="mood">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+            <line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
+          </svg>
+        </span>
+        <span class="nav-label">Mood Tracker</span>
+      </a>
+
+      <a href="#" class="nav-item" data-page="notes">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </span>
+        <span class="nav-label">Notes</span>
+      </a>
+
+      <div class="nav-section-label">Performance</div>
+
+      <a href="#" class="nav-item" data-page="analytics">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/>
+          </svg>
+        </span>
+        <span class="nav-label">Analytics</span>
+      </a>
+
+      <a href="#" class="nav-item" data-page="reports">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/>
+            <polyline points="13 2 13 9 20 9"/>
+          </svg>
+        </span>
+        <span class="nav-label">Reports</span>
+      </a>
+
+      <a href="#" class="nav-item" data-page="backup">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="21 15 21 21 3 21 3 15"/><polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+        </span>
+        <span class="nav-label">Backup</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-date" id="sidebarDate"></div>
+      <div class="sidebar-quote">"Discipline is the bridge between goals and accomplishment."</div>
+      <button class="sidebar-lock-btn" id="sidebarLockBtn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        <span id="sidebarLockLabel">Set PIN Lock</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-wrapper">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-left">
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="header-title" id="pageTitle">Dashboard</div>
+      </div>
+      <div class="header-right">
+        <div class="header-date" id="headerDate"></div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon theme-dark">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+          </span>
+          <span class="theme-icon theme-light">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <main class="content" id="mainContent">
+
+      <!-- DASHBOARD PAGE -->
+      <section class="page active" id="page-dashboard">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Good <span id="timeGreeting">Morning</span> 👋</h1>
+            <p class="page-subtitle">Here's your performance overview for today.</p>
+          </div>
+          <div class="today-badge">
+            <span id="todayFull"></span>
+          </div>
+        </div>
+
+        <!-- SCORE CARDS ROW -->
+        <div class="score-row">
+          <div class="score-card score-discipline">
+            <div class="score-card-label">Discipline Score</div>
+            <div class="score-card-value" id="disciplineScore">—</div>
+            <div class="score-card-sub">Today</div>
+          </div>
+          <div class="score-card score-productivity">
+            <div class="score-card-label">Productivity</div>
+            <div class="score-card-value" id="productivityScore">—</div>
+            <div class="score-card-sub">Today</div>
+          </div>
+          <div class="score-card score-mood">
+            <div class="score-card-label">Mood</div>
+            <div class="score-card-value" id="moodScore">—</div>
+            <div class="score-card-sub">Today</div>
+          </div>
+          <div class="score-card score-trading">
+            <div class="score-card-label">Trading P/L</div>
+            <div class="score-card-value" id="tradingPL">$0</div>
+            <div class="score-card-sub">This month</div>
+          </div>
+        </div>
+
+        <!-- MAIN DASHBOARD GRID -->
+        <div class="dashboard-grid">
+
+          <!-- HABIT PROGRESS -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">Today's Habits</h3>
+              <a href="#" class="dash-card-link" data-page="habits">View All →</a>
+            </div>
+            <div class="habit-progress-wrap">
+              <div class="habit-ring-wrap">
+                <svg class="habit-ring" viewBox="0 0 80 80">
+                  <circle class="ring-bg" cx="40" cy="40" r="32" />
+                  <circle class="ring-fill" id="habitRingFill" cx="40" cy="40" r="32"
+                    stroke-dasharray="201.06"
+                    stroke-dashoffset="201.06"
+                    transform="rotate(-90 40 40)" />
+                </svg>
+                <div class="ring-label">
+                  <span class="ring-pct" id="habitPct">0%</span>
+                  <span class="ring-sub">done</span>
+                </div>
+              </div>
+              <div class="habit-stats">
+                <div class="habit-stat">
+                  <span class="hstat-val" id="habitsCompleted">0</span>
+                  <span class="hstat-label">Completed</span>
+                </div>
+                <div class="habit-stat">
+                  <span class="hstat-val" id="habitsTotal">0</span>
+                  <span class="hstat-label">Total</span>
+                </div>
+                <div class="habit-stat">
+                  <span class="hstat-val" id="habitStreak">0</span>
+                  <span class="hstat-label">Best Streak</span>
+                </div>
+              </div>
+            </div>
+            <div class="empty-state" id="habitEmptyState">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+              <span>No habits yet. <a href="#" data-page="habits">Add your first habit →</a></span>
+            </div>
+          </div>
+
+          <!-- GOALS OVERVIEW -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">Goals Overview</h3>
+              <a href="#" class="dash-card-link" data-page="goals">View All →</a>
+            </div>
+            <div class="goals-list" id="dashGoalsList">
+              <div class="empty-state">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                <span>No goals yet. <a href="#" data-page="goals">Set your first goal →</a></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TRADING SUMMARY -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">Trading Summary</h3>
+              <a href="#" class="dash-card-link" data-page="forex">Journal →</a>
+            </div>
+            <div class="trading-stats" id="dashTradingStats">
+              <div class="t-stat">
+                <div class="t-stat-val" id="totalTrades">0</div>
+                <div class="t-stat-label">Total Trades</div>
+              </div>
+              <div class="t-stat">
+                <div class="t-stat-val green" id="winRate">0%</div>
+                <div class="t-stat-label">Win Rate</div>
+              </div>
+              <div class="t-stat">
+                <div class="t-stat-val" id="avgRR">0:0</div>
+                <div class="t-stat-label">Avg R:R</div>
+              </div>
+              <div class="t-stat">
+                <div class="t-stat-val" id="totalProfit">$0</div>
+                <div class="t-stat-label">Net P/L</div>
+              </div>
+            </div>
+            <div class="empty-state" id="tradeEmptyState">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+              <span>No trades logged. <a href="#" data-page="forex">Log your first trade →</a></span>
+            </div>
+          </div>
+
+          <!-- TODAY'S CHECKLIST -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">Daily Checklist</h3>
+              <span class="dash-card-badge" id="checklistCount">0/7</span>
+            </div>
+            <div class="checklist" id="dailyChecklist">
+              <label class="check-item"><input type="checkbox" data-key="morning_routine"/><span class="check-box"></span><span class="check-label">Morning Routine</span></label>
+              <label class="check-item"><input type="checkbox" data-key="trade_analysis"/><span class="check-box"></span><span class="check-label">Trade Analysis Done</span></label>
+              <label class="check-item"><input type="checkbox" data-key="study_session"/><span class="check-box"></span><span class="check-label">Study Session</span></label>
+              <label class="check-item"><input type="checkbox" data-key="exercise"/><span class="check-box"></span><span class="check-label">Exercise</span></label>
+              <label class="check-item"><input type="checkbox" data-key="reading"/><span class="check-box"></span><span class="check-label">Reading</span></label>
+              <label class="check-item"><input type="checkbox" data-key="journal_entry"/><span class="check-box"></span><span class="check-label">Journal Entry</span></label>
+              <label class="check-item"><input type="checkbox" data-key="evening_review"/><span class="check-box"></span><span class="check-label">Evening Review</span></label>
+            </div>
+          </div>
+
+          <!-- QUICK STATS -->
+          <div class="dash-card dash-card-wide">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">Performance Metrics</h3>
+              <span class="dash-card-sub">This month</span>
+            </div>
+            <div class="metrics-grid">
+              <div class="metric-item">
+                <div class="metric-bar-wrap">
+                  <div class="metric-bar-label">
+                    <span>Consistency</span>
+                    <span id="consistencyPct">0%</span>
+                  </div>
+                  <div class="metric-bar"><div class="metric-fill" id="consistencyBar" style="width:0%"></div></div>
+                </div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-bar-wrap">
+                  <div class="metric-bar-label">
+                    <span>Discipline</span>
+                    <span id="disciplinePct">0%</span>
+                  </div>
+                  <div class="metric-bar"><div class="metric-fill accent2" id="disciplineBar" style="width:0%"></div></div>
+                </div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-bar-wrap">
+                  <div class="metric-bar-label">
+                    <span>Goal Progress</span>
+                    <span id="goalPct">0%</span>
+                  </div>
+                  <div class="metric-bar"><div class="metric-fill accent3" id="goalBar" style="width:0%"></div></div>
+                </div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-bar-wrap">
+                  <div class="metric-bar-label">
+                    <span>Study Hours</span>
+                    <span id="studyHoursPct">0h</span>
+                  </div>
+                  <div class="metric-bar"><div class="metric-fill accent4" id="studyBar" style="width:0%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RECENT ACTIVITY -->
+          <div class="dash-card dash-card-wide">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">Recent Activity</h3>
+            </div>
+            <div class="activity-feed" id="activityFeed">
+              <div class="activity-empty">
+                <p>Your activity will appear here as you use the app.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================== HABIT TRACKER PAGE ===================== -->
+      <section class="page" id="page-habits">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Habit Tracker</h1>
+            <p class="page-subtitle">Build consistency one day at a time.</p>
+          </div>
+          <button class="btn btn-primary" id="openAddHabitModal">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Habit
+          </button>
+        </div>
+
+        <!-- HABIT STATS STRIP -->
+        <div class="habit-stats-strip" id="habitStatsStrip">
+          <div class="hstrip-card">
+            <div class="hstrip-val" id="hs_total">0</div>
+            <div class="hstrip-label">Total Habits</div>
+          </div>
+          <div class="hstrip-card">
+            <div class="hstrip-val accent" id="hs_today">0</div>
+            <div class="hstrip-label">Done Today</div>
+          </div>
+          <div class="hstrip-card">
+            <div class="hstrip-val green" id="hs_streak">0</div>
+            <div class="hstrip-label">Best Streak</div>
+          </div>
+          <div class="hstrip-card">
+            <div class="hstrip-val accent2" id="hs_rate">0%</div>
+            <div class="hstrip-label">7-Day Rate</div>
+          </div>
+          <div class="hstrip-card">
+            <div class="hstrip-val accent4" id="hs_monthly">0%</div>
+            <div class="hstrip-label">Monthly Rate</div>
+          </div>
+        </div>
+
+        <!-- WEEK VIEW -->
+        <div class="habit-week-header">
+          <h3 class="section-title">This Week</h3>
+          <div class="week-days" id="weekDaysHeader"></div>
+        </div>
+
+        <!-- CATEGORY FILTER -->
+        <div class="category-filter" id="categoryFilter">
+          <button class="cat-btn active" data-cat="all">All</button>
+          <button class="cat-btn" data-cat="health">🏥 Health</button>
+          <button class="cat-btn" data-cat="study">📚 Study</button>
+          <button class="cat-btn" data-cat="forex">📈 Forex</button>
+          <button class="cat-btn" data-cat="fitness">💪 Fitness</button>
+          <button class="cat-btn" data-cat="religion">🤲 Religion</button>
+          <button class="cat-btn" data-cat="reading">📖 Reading</button>
+          <button class="cat-btn" data-cat="custom">⚡ Custom</button>
+        </div>
+
+        <!-- HABITS LIST -->
+        <div class="habits-list" id="habitsList"></div>
+
+        <!-- HABIT EMPTY STATE -->
+        <div class="habit-empty" id="habitPageEmpty" style="display:none">
+          <div class="empty-illustration">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3">
+              <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+            </svg>
+          </div>
+          <h3>No habits yet</h3>
+          <p>Click "Add Habit" to start building your daily system.</p>
+          <button class="btn btn-primary" id="openAddHabitModal2">+ Add Your First Habit</button>
+        </div>
+
+        <!-- MONTHLY HEATMAP -->
+        <div class="heatmap-section" id="heatmapSection" style="display:none">
+          <h3 class="section-title">Monthly Heatmap</h3>
+          <div class="heatmap-wrap" id="heatmapWrap"></div>
+        </div>
+
+      </section>
+      <!-- ===================== END HABIT TRACKER ===================== -->
+
+      <!-- ===================== FOREX JOURNAL PAGE ===================== -->
+      <section class="page" id="page-forex">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Forex Journal</h1>
+            <p class="page-subtitle">Track every trade. Master your edge.</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-ghost" id="forexFilterBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+              Filter
+            </button>
+            <button class="btn btn-primary" id="openAddTradeModal">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Log Trade
+            </button>
+          </div>
+        </div>
+
+        <!-- TRADING STATS STRIP -->
+        <div class="trade-stats-strip">
+          <div class="tstrip-card">
+            <div class="tstrip-icon" style="background:rgba(79,158,255,0.15);color:var(--accent)">📊</div>
+            <div class="tstrip-info">
+              <div class="tstrip-val" id="ts_total">0</div>
+              <div class="tstrip-label">Total Trades</div>
+            </div>
+          </div>
+          <div class="tstrip-card">
+            <div class="tstrip-icon" style="background:rgba(52,211,153,0.15);color:var(--green)">🏆</div>
+            <div class="tstrip-info">
+              <div class="tstrip-val green" id="ts_winrate">0%</div>
+              <div class="tstrip-label">Win Rate</div>
+            </div>
+          </div>
+          <div class="tstrip-card">
+            <div class="tstrip-icon" style="background:rgba(167,139,250,0.15);color:var(--accent2)">💰</div>
+            <div class="tstrip-info">
+              <div class="tstrip-val" id="ts_pnl">$0.00</div>
+              <div class="tstrip-label">Net P&L</div>
+            </div>
+          </div>
+          <div class="tstrip-card">
+            <div class="tstrip-icon" style="background:rgba(251,146,60,0.15);color:var(--accent4)">⚖️</div>
+            <div class="tstrip-info">
+              <div class="tstrip-val" id="ts_rr">0.0</div>
+              <div class="tstrip-label">Avg R:R</div>
+            </div>
+          </div>
+          <div class="tstrip-card">
+            <div class="tstrip-icon" style="background:rgba(244,114,182,0.15);color:var(--accent5)">📈</div>
+            <div class="tstrip-info">
+              <div class="tstrip-val green" id="ts_wins">0</div>
+              <div class="tstrip-label">Wins</div>
+            </div>
+          </div>
+          <div class="tstrip-card">
+            <div class="tstrip-icon" style="background:rgba(248,113,113,0.15);color:var(--red)">📉</div>
+            <div class="tstrip-info">
+              <div class="tstrip-val red" id="ts_losses">0</div>
+              <div class="tstrip-label">Losses</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FILTER BAR -->
+        <div class="trade-filter-bar" id="tradeFilterBar" style="display:none">
+          <div class="filter-group">
+            <label class="form-label">Pair</label>
+            <select class="form-input form-input-sm" id="filterPair">
+              <option value="">All Pairs</option>
+              <option>EURUSD</option><option>GBPUSD</option><option>USDJPY</option>
+              <option>XAUUSD</option><option>USDCAD</option><option>AUDUSD</option>
+              <option>NZDUSD</option><option>USDCHF</option><option>GBPJPY</option>
+              <option>EURJPY</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="form-label">Result</label>
+            <select class="form-input form-input-sm" id="filterResult">
+              <option value="">All</option>
+              <option value="win">Wins Only</option>
+              <option value="loss">Losses Only</option>
+              <option value="be">Break Even</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="form-label">Timeframe</label>
+            <select class="form-input form-input-sm" id="filterTF">
+              <option value="">All TFs</option>
+              <option>Monthly</option><option>Weekly</option><option>Daily</option>
+              <option>H4</option><option>H1</option><option>M15</option><option>M5</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="form-label">Direction</label>
+            <select class="form-input form-input-sm" id="filterDir">
+              <option value="">All</option>
+              <option value="buy">Buy</option>
+              <option value="sell">Sell</option>
+            </select>
+          </div>
+          <button class="btn btn-ghost btn-sm" id="clearFiltersBtn">Clear</button>
+        </div>
+
+        <!-- TRADE VIEW TABS -->
+        <div class="trade-view-tabs">
+          <button class="trade-tab active" data-tab="history">Trade History</button>
+          <button class="trade-tab" data-tab="psychology">Psychology Log</button>
+          <button class="trade-tab" data-tab="pairs">Pair Analysis</button>
+        </div>
+
+        <!-- HISTORY TAB -->
+        <div class="trade-tab-content active" id="tab-history">
+          <div class="trades-table-wrap">
+            <table class="trades-table" id="tradesTable">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Pair</th>
+                  <th>Dir</th>
+                  <th>TF</th>
+                  <th>Entry</th>
+                  <th>Exit</th>
+                  <th>SL</th>
+                  <th>TP</th>
+                  <th>R:R</th>
+                  <th>P&L</th>
+                  <th>Result</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tradesTableBody"></tbody>
+            </table>
+            <div class="trades-empty" id="tradesEmpty">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+              <h3>No trades logged yet</h3>
+              <p>Click "Log Trade" to record your first trade.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PSYCHOLOGY TAB -->
+        <div class="trade-tab-content" id="tab-psychology">
+          <div class="psych-grid">
+            <div class="psych-card">
+              <h4 class="psych-card-title">Mistake Tracker</h4>
+              <div class="mistake-list" id="mistakeList"></div>
+            </div>
+            <div class="psych-card">
+              <h4 class="psych-card-title">Emotional State Log</h4>
+              <div class="emotion-chart" id="emotionChart"></div>
+            </div>
+            <div class="psych-card psych-wide">
+              <h4 class="psych-card-title">Psychology Scores</h4>
+              <div class="psych-scores" id="psychScores"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAIR ANALYSIS TAB -->
+        <div class="trade-tab-content" id="tab-pairs">
+          <div class="pairs-grid" id="pairsGrid"></div>
+        </div>
+
+      </section>
+      <!-- ===================== END FOREX JOURNAL ===================== -->
+
+      <!-- ===================== GOALS PAGE ===================== -->
+      <section class="page" id="page-goals">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Goals System</h1>
+            <p class="page-subtitle">Set targets. Track progress. Achieve more.</p>
+          </div>
+          <button class="btn btn-primary" id="openAddGoalModal">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Goal
+          </button>
+        </div>
+
+        <!-- GOAL PERIOD TABS -->
+        <div class="goal-period-tabs">
+          <button class="goal-tab active" data-period="all">All Goals</button>
+          <button class="goal-tab" data-period="daily">Daily</button>
+          <button class="goal-tab" data-period="weekly">Weekly</button>
+          <button class="goal-tab" data-period="monthly">Monthly</button>
+          <button class="goal-tab" data-period="yearly">Yearly</button>
+        </div>
+
+        <!-- GOAL TYPE FILTER -->
+        <div class="goal-type-filter">
+          <button class="gtype-btn active" data-type="all">🌟 All</button>
+          <button class="gtype-btn" data-type="trading">📈 Trading</button>
+          <button class="gtype-btn" data-type="study">📚 Study</button>
+          <button class="gtype-btn" data-type="health">🏥 Health</button>
+          <button class="gtype-btn" data-type="personal">💫 Personal</button>
+          <button class="gtype-btn" data-type="finance">💰 Finance</button>
+        </div>
+
+        <!-- GOALS STATS ROW -->
+        <div class="goals-stats-row">
+          <div class="gstat-card"><div class="gstat-val" id="gs_total">0</div><div class="gstat-label">Total Goals</div></div>
+          <div class="gstat-card"><div class="gstat-val green" id="gs_completed">0</div><div class="gstat-label">Completed</div></div>
+          <div class="gstat-card"><div class="gstat-val accent" id="gs_inprogress">0</div><div class="gstat-label">In Progress</div></div>
+          <div class="gstat-card"><div class="gstat-val accent2" id="gs_avgprogress">0%</div><div class="gstat-label">Avg Progress</div></div>
+        </div>
+
+        <!-- GOALS LIST -->
+        <div class="goals-container" id="goalsContainer"></div>
+
+        <!-- EMPTY -->
+        <div class="goals-empty" id="goalsEmpty" style="display:none">
+          <span>🎯</span>
+          <h3>No goals yet</h3>
+          <p>Click "Add Goal" to set your first target.</p>
+          <button class="btn btn-primary" id="openAddGoalModal2">+ Add Your First Goal</button>
+        </div>
+      </section>
+      <!-- ===================== END GOALS ===================== -->
+
+      <!-- ===================== REFLECTION PAGE ===================== -->
+      <section class="page" id="page-reflection">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Daily Reflection</h1>
+            <p class="page-subtitle">Review your day. Extract lessons. Grow.</p>
+          </div>
+          <div class="header-actions">
+            <span class="reflection-date-badge" id="reflectionDateBadge"></span>
+            <button class="btn btn-primary" id="saveReflectionBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save Today
+            </button>
+          </div>
+        </div>
+
+        <!-- REFLECTION FORM -->
+        <div class="reflection-grid">
+          <div class="reflection-card rc-went-well">
+            <div class="rc-header">
+              <span class="rc-icon">✅</span>
+              <h3 class="rc-title">What Went Well</h3>
+            </div>
+            <textarea class="rc-textarea" id="rf_went_well" placeholder="List the wins, successes, and positive moments from today..."></textarea>
+          </div>
+
+          <div class="reflection-card rc-went-wrong">
+            <div class="rc-header">
+              <span class="rc-icon">⚠️</span>
+              <h3 class="rc-title">What Went Wrong</h3>
+            </div>
+            <textarea class="rc-textarea" id="rf_went_wrong" placeholder="Be honest. What didn't go as planned today?"></textarea>
+          </div>
+
+          <div class="reflection-card rc-lessons">
+            <div class="rc-header">
+              <span class="rc-icon">💡</span>
+              <h3 class="rc-title">Lessons Learned</h3>
+            </div>
+            <textarea class="rc-textarea" id="rf_lessons" placeholder="What did you learn today? From trading, life, reading?"></textarea>
+          </div>
+
+          <div class="reflection-card rc-improvements">
+            <div class="rc-header">
+              <span class="rc-icon">🚀</span>
+              <h3 class="rc-title">Tomorrow's Improvements</h3>
+            </div>
+            <textarea class="rc-textarea" id="rf_improvements" placeholder="What will you do better tomorrow?"></textarea>
+          </div>
+
+          <div class="reflection-card rc-gratitude rc-full-width">
+            <div class="rc-header">
+              <span class="rc-icon">🙏</span>
+              <h3 class="rc-title">Gratitude Notes</h3>
+            </div>
+            <textarea class="rc-textarea rc-textarea-sm" id="rf_gratitude" placeholder="List 3 things you're grateful for today..."></textarea>
+          </div>
+
+          <!-- DAILY SCORES -->
+          <div class="reflection-card rc-full-width">
+            <div class="rc-header">
+              <span class="rc-icon">📊</span>
+              <h3 class="rc-title">Day Ratings</h3>
+            </div>
+            <div class="day-ratings-grid">
+              <div class="day-rating-item">
+                <label class="rating-label">Overall Day</label>
+                <div class="rating-stars" data-field="rf_overall">
+                  <button class="star-btn" data-val="1">★</button><button class="star-btn" data-val="2">★</button>
+                  <button class="star-btn" data-val="3">★</button><button class="star-btn" data-val="4">★</button>
+                  <button class="star-btn" data-val="5">★</button>
+                </div>
+                <input type="hidden" id="rf_overall" value="0"/>
+              </div>
+              <div class="day-rating-item">
+                <label class="rating-label">Productivity</label>
+                <div class="rating-stars" data-field="rf_productivity">
+                  <button class="star-btn" data-val="1">★</button><button class="star-btn" data-val="2">★</button>
+                  <button class="star-btn" data-val="3">★</button><button class="star-btn" data-val="4">★</button>
+                  <button class="star-btn" data-val="5">★</button>
+                </div>
+                <input type="hidden" id="rf_productivity" value="0"/>
+              </div>
+              <div class="day-rating-item">
+                <label class="rating-label">Trading Focus</label>
+                <div class="rating-stars" data-field="rf_trading">
+                  <button class="star-btn" data-val="1">★</button><button class="star-btn" data-val="2">★</button>
+                  <button class="star-btn" data-val="3">★</button><button class="star-btn" data-val="4">★</button>
+                  <button class="star-btn" data-val="5">★</button>
+                </div>
+                <input type="hidden" id="rf_trading" value="0"/>
+              </div>
+              <div class="day-rating-item">
+                <label class="rating-label">Discipline</label>
+                <div class="rating-stars" data-field="rf_discipline">
+                  <button class="star-btn" data-val="1">★</button><button class="star-btn" data-val="2">★</button>
+                  <button class="star-btn" data-val="3">★</button><button class="star-btn" data-val="4">★</button>
+                  <button class="star-btn" data-val="5">★</button>
+                </div>
+                <input type="hidden" id="rf_discipline" value="0"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAST REFLECTIONS -->
+        <div class="past-reflections">
+          <h3 class="section-title" style="margin-top:28px">Past Reflections</h3>
+          <div class="past-ref-list" id="pastReflectionsList"></div>
+        </div>
+      </section>
+      <!-- ===================== END REFLECTION ===================== -->
+
+      <!-- ===================== MOOD PAGE ===================== -->
+      <section class="page" id="page-mood">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Mood Tracker</h1>
+            <p class="page-subtitle">Track how you feel. Spot your patterns.</p>
+          </div>
+          <button class="btn btn-primary" id="saveMoodBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Save Today's Mood
+          </button>
+        </div>
+
+        <!-- TODAY'S MOOD ENTRY -->
+        <div class="mood-entry-card">
+          <h3 class="section-title">Today's Check-In</h3>
+
+          <!-- MOOD SELECTOR -->
+          <div class="mood-section">
+            <label class="mood-section-label">Overall Mood</label>
+            <div class="mood-selector" id="moodSelector">
+              <button class="mood-face" data-mood="5" data-label="Amazing">😄<span>Amazing</span></button>
+              <button class="mood-face" data-mood="4" data-label="Good">😊<span>Good</span></button>
+              <button class="mood-face" data-mood="3" data-label="Neutral">😐<span>Neutral</span></button>
+              <button class="mood-face" data-mood="2" data-label="Bad">😟<span>Bad</span></button>
+              <button class="mood-face" data-mood="1" data-label="Terrible">😢<span>Terrible</span></button>
+            </div>
+            <input type="hidden" id="moodValue" value="0"/>
+          </div>
+
+          <!-- SLIDERS -->
+          <div class="mood-sliders-grid">
+            <div class="mood-slider-item">
+              <div class="mood-slider-header">
+                <label class="mood-section-label">⚡ Energy Level</label>
+                <span class="mood-slider-val" id="energyVal">5</span>
+              </div>
+              <input type="range" class="score-slider mood-range" id="moodEnergy" min="1" max="10" value="5"/>
+            </div>
+            <div class="mood-slider-item">
+              <div class="mood-slider-header">
+                <label class="mood-section-label">😤 Stress Level</label>
+                <span class="mood-slider-val" id="stressVal">5</span>
+              </div>
+              <input type="range" class="score-slider mood-range" id="moodStress" min="1" max="10" value="5"/>
+            </div>
+            <div class="mood-slider-item">
+              <div class="mood-slider-header">
+                <label class="mood-section-label">🔥 Motivation</label>
+                <span class="mood-slider-val" id="motivationVal">5</span>
+              </div>
+              <input type="range" class="score-slider mood-range" id="moodMotivation" min="1" max="10" value="5"/>
+            </div>
+            <div class="mood-slider-item">
+              <div class="mood-slider-header">
+                <label class="mood-section-label">🎯 Focus Level</label>
+                <span class="mood-slider-val" id="focusVal">5</span>
+              </div>
+              <input type="range" class="score-slider mood-range" id="moodFocus" min="1" max="10" value="5"/>
+            </div>
+          </div>
+
+          <!-- HEALTH METRICS -->
+          <div class="health-metrics-grid">
+            <div class="health-metric">
+              <div class="hm-icon">💧</div>
+              <label class="mood-section-label">Water (glasses)</label>
+              <input type="number" class="form-input hm-input" id="moodWater" min="0" max="20" value="0" placeholder="0"/>
+            </div>
+            <div class="health-metric">
+              <div class="hm-icon">😴</div>
+              <label class="mood-section-label">Sleep (hours)</label>
+              <input type="number" class="form-input hm-input" id="moodSleep" min="0" max="24" step="0.5" value="0" placeholder="0"/>
+            </div>
+            <div class="health-metric">
+              <div class="hm-icon">🏃</div>
+              <label class="mood-section-label">Exercise (min)</label>
+              <input type="number" class="form-input hm-input" id="moodExercise" min="0" max="300" value="0" placeholder="0"/>
+            </div>
+            <div class="health-metric">
+              <div class="hm-icon">📚</div>
+              <label class="mood-section-label">Study (hours)</label>
+              <input type="number" class="form-input hm-input" id="moodStudy" min="0" max="24" step="0.5" value="0" placeholder="0"/>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:16px">
+            <label class="form-label">Mood Note (optional)</label>
+            <textarea class="form-input form-textarea" id="moodNote" rows="2" placeholder="Anything specific affecting your mood today?"></textarea>
+          </div>
+        </div>
+
+        <!-- MOOD HISTORY -->
+        <div class="mood-history-section">
+          <h3 class="section-title" style="margin-top:28px;margin-bottom:16px">Last 7 Days</h3>
+          <div class="mood-week-chart" id="moodWeekChart"></div>
+        </div>
+
+        <!-- MOOD LOG -->
+        <div class="mood-log-section">
+          <h3 class="section-title" style="margin-top:28px;margin-bottom:16px">Mood History</h3>
+          <div class="mood-log-list" id="moodLogList"></div>
+        </div>
+      </section>
+      <!-- ===================== END MOOD ===================== -->
+
+      <!-- ===================== NOTES PAGE ===================== -->
+      <section class="page" id="page-notes">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Notes</h1>
+            <p class="page-subtitle">Capture ideas. Record knowledge. Stay sharp.</p>
+          </div>
+          <button class="btn btn-primary" id="openAddNoteModal">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            New Note
+          </button>
+        </div>
+
+        <!-- SEARCH BAR -->
+        <div class="notes-search-wrap">
+          <div class="notes-search-box">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="notes-search-input" id="notesSearch" placeholder="Search notes..."/>
+          </div>
+          <div class="notes-cat-filter">
+            <button class="cat-btn active" data-ncat="all">All</button>
+            <button class="cat-btn" data-ncat="quick">⚡ Quick</button>
+            <button class="cat-btn" data-ncat="learning">📚 Learning</button>
+            <button class="cat-btn" data-ncat="forex">📈 Forex</button>
+            <button class="cat-btn" data-ncat="personal">💫 Personal</button>
+          </div>
+        </div>
+
+        <!-- NOTES GRID -->
+        <div class="notes-grid" id="notesGrid"></div>
+
+        <!-- NOTES EMPTY -->
+        <div class="notes-empty" id="notesEmpty" style="display:none">
+          <span>📓</span>
+          <h3>No notes yet</h3>
+          <p>Click "New Note" to capture your first thought.</p>
+        </div>
+      </section>
+      <!-- ===================== END NOTES ===================== -->
+
+      <!-- ===================== ANALYTICS PAGE ===================== -->
+      <section class="page" id="page-analytics">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Analytics</h1>
+            <p class="page-subtitle">Data-driven insights into your performance.</p>
+          </div>
+          <div class="header-actions">
+            <select class="form-input form-input-sm" id="analyticsRange" style="min-width:130px">
+              <option value="7">Last 7 Days</option>
+              <option value="30" selected>Last 30 Days</option>
+              <option value="90">Last 90 Days</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- KPI ROW -->
+        <div class="analytics-kpi-row" id="analyticsKPI"></div>
+
+        <!-- CHARTS GRID -->
+        <div class="analytics-grid">
+
+          <!-- HABIT CONSISTENCY CHART -->
+          <div class="chart-card chart-card-wide">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Habit Consistency — Last 30 Days</h3>
+              <span class="chart-subtitle" id="habitConsistencyRate"></span>
+            </div>
+            <div class="chart-area">
+              <canvas id="habitConsistencyChart" class="bar-chart-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- TRADING P&L CHART -->
+          <div class="chart-card chart-card-wide">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Trading P&L — Cumulative</h3>
+              <span class="chart-subtitle" id="tradingPLSubtitle"></span>
+            </div>
+            <div class="chart-area">
+              <canvas id="tradingPLChart" class="bar-chart-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- MOOD TREND -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Mood Trend</h3>
+              <span class="chart-subtitle" id="moodTrendSubtitle"></span>
+            </div>
+            <div class="chart-area chart-area-sm">
+              <canvas id="moodTrendChart" class="bar-chart-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- WIN/LOSS PIE -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Trade Results</h3>
+            </div>
+            <div class="chart-area chart-area-sm donut-wrap">
+              <canvas id="tradeResultChart" class="bar-chart-canvas"></canvas>
+              <div class="donut-legend" id="donutLegend"></div>
+            </div>
+          </div>
+
+          <!-- DISCIPLINE HEATMAP -->
+          <div class="chart-card chart-card-wide">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Discipline Heatmap — Activity Calendar</h3>
+            </div>
+            <div class="analytics-heatmap" id="analyticsHeatmap"></div>
+          </div>
+
+          <!-- PAIR PERFORMANCE -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Pair Performance</h3>
+            </div>
+            <div class="pair-perf-list" id="pairPerfList"></div>
+          </div>
+
+          <!-- GOALS PROGRESS -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Goals Progress</h3>
+            </div>
+            <div class="goals-analytics-list" id="goalsAnalyticsList"></div>
+          </div>
+
+          <!-- PERFORMANCE RADAR -->
+          <div class="chart-card chart-card-wide">
+            <div class="chart-card-header">
+              <h3 class="chart-title">Performance Radar — Overall Scores</h3>
+            </div>
+            <div class="radar-wrap">
+              <canvas id="radarChart" class="radar-canvas"></canvas>
+              <div class="radar-scores" id="radarScores"></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+      <!-- ===================== END ANALYTICS ===================== -->
+
+      <!-- ===================== REPORTS PAGE ===================== -->
+      <section class="page" id="page-reports">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Reports</h1>
+            <p class="page-subtitle">Structured summaries of your journey.</p>
+          </div>
+          <div class="header-actions">
+            <select class="form-input form-input-sm" id="reportPeriod" style="min-width:140px">
+              <option value="daily">Daily Report</option>
+              <option value="weekly" selected>Weekly Report</option>
+              <option value="monthly">Monthly Report</option>
+              <option value="yearly">Yearly Report</option>
+            </select>
+            <button class="btn btn-ghost" id="printReportBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Print
+            </button>
+            <button class="btn btn-primary" id="generateReportBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+              Generate
+            </button>
+          </div>
+        </div>
+
+        <!-- REPORT OUTPUT -->
+        <div class="report-output" id="reportOutput">
+          <div class="report-prompt">
+            <span>📋</span>
+            <p>Select a period and click <strong>Generate</strong> to build your report.</p>
+          </div>
+        </div>
+
+      </section>
+      <!-- ===================== END REPORTS ===================== -->
+
+      <!-- ===================== TRADING RULES PAGE ===================== -->
+      <section class="page" id="page-rules">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Trading Rules</h1>
+            <p class="page-subtitle">Your rules. Your edge. Never break them.</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-ghost" id="openRuleBreakModal">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Log Rule Break
+            </button>
+            <button class="btn btn-primary" id="openAddRuleModal">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Rule
+            </button>
+          </div>
+        </div>
+
+        <!-- RULES STATS -->
+        <div class="rules-stats-strip">
+          <div class="rstat-card">
+            <div class="rstat-val" id="rs_total">0</div>
+            <div class="rstat-label">Total Rules</div>
+          </div>
+          <div class="rstat-card">
+            <div class="rstat-val green" id="rs_active">0</div>
+            <div class="rstat-label">Active Rules</div>
+          </div>
+          <div class="rstat-card">
+            <div class="rstat-val red" id="rs_breaks">0</div>
+            <div class="rstat-label">Total Breaks</div>
+          </div>
+          <div class="rstat-card">
+            <div class="rstat-val accent" id="rs_this_week">0</div>
+            <div class="rstat-label">Breaks This Week</div>
+          </div>
+          <div class="rstat-card">
+            <div class="rstat-val accent2" id="rs_discipline">100%</div>
+            <div class="rstat-label">Discipline Rate</div>
+          </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="rules-tabs">
+          <button class="rules-tab active" data-rtab="rules">📋 My Rules</button>
+          <button class="rules-tab" data-rtab="checklist">✅ Pre-Trade Checklist</button>
+          <button class="rules-tab" data-rtab="breaks">⚠️ Break Tracker</button>
+        </div>
+
+        <!-- MY RULES TAB -->
+        <div class="rules-tab-content active" id="rtab-rules">
+
+          <!-- Category filter -->
+          <div class="category-filter" id="rulesCatFilter">
+            <button class="cat-btn active" data-rcat="all">All</button>
+            <button class="cat-btn" data-rcat="entry">📈 Entry</button>
+            <button class="cat-btn" data-rcat="exit">📉 Exit</button>
+            <button class="cat-btn" data-rcat="risk">⚖️ Risk</button>
+            <button class="cat-btn" data-rcat="psychology">🧠 Psychology</button>
+            <button class="cat-btn" data-rcat="general">⚡ General</button>
+          </div>
+
+          <div class="rules-list" id="rulesList"></div>
+
+          <div class="rules-empty" id="rulesEmpty" style="display:none">
+            <span>📋</span>
+            <h3>No rules yet</h3>
+            <p>Add your trading rules to build your personal playbook.</p>
+          </div>
+        </div>
+
+        <!-- PRE-TRADE CHECKLIST TAB -->
+        <div class="rules-tab-content" id="rtab-checklist">
+          <div class="pretrade-wrap">
+            <div class="pretrade-header">
+              <h3 class="section-title">Before Every Trade — Complete This</h3>
+              <div class="pretrade-actions">
+                <button class="btn btn-ghost btn-sm" id="resetChecklistBtn">Reset</button>
+                <button class="btn btn-primary btn-sm" id="addChecklistItemBtn">+ Add Item</button>
+              </div>
+            </div>
+            <div class="pretrade-progress-bar-wrap">
+              <div class="pretrade-progress-bar">
+                <div class="pretrade-progress-fill" id="pretradeProgressFill" style="width:0%"></div>
+              </div>
+              <span class="pretrade-progress-pct" id="pretradeProgressPct">0%</span>
+            </div>
+            <div class="pretrade-list" id="pretradeList"></div>
+
+            <div class="pretrade-result" id="pretradeResult" style="display:none">
+              <div class="ptr-icon" id="ptrIcon">✅</div>
+              <div class="ptr-text" id="ptrText">All checks passed! You may enter the trade.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BREAK TRACKER TAB -->
+        <div class="rules-tab-content" id="rtab-breaks">
+          <div class="breaks-summary" id="breaksSummary"></div>
+          <div class="breaks-list" id="breaksList"></div>
+          <div class="breaks-empty" id="breaksEmpty" style="display:none">
+            <span>🏆</span>
+            <h3>No rule breaks!</h3>
+            <p>Perfect discipline. Keep it up!</p>
+          </div>
+        </div>
+
+      </section>
+      <!-- ===================== END TRADING RULES ===================== -->
+
+      <!-- ===================== BACKUP CENTER PAGE ===================== -->
+      <section class="page" id="page-backup">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Backup Center</h1>
+            <p class="page-subtitle">Export your data. Restore anytime. Stay portable.</p>
+          </div>
+          <div class="backup-storage-badge" id="storageUsageBadge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            <span id="storageSize">Calculating...</span>
+          </div>
+        </div>
+
+        <!-- STATUS BANNER -->
+        <div class="backup-status-banner" id="backupStatusBanner">
+          <div class="bsb-icon">🔒</div>
+          <div class="bsb-text">
+            <strong>Your data is stored locally in this browser.</strong>
+            <span>Export a backup regularly so you never lose your progress. Backups are portable — import on any device.</span>
+          </div>
+          <div class="bsb-last" id="lastBackupInfo">No backup created yet</div>
+        </div>
+
+        <!-- MAIN BACKUP GRID -->
+        <div class="backup-main-grid">
+
+          <!-- EXPORT CARD -->
+          <div class="backup-card backup-card-export">
+            <div class="bcard-icon-wrap export-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </div>
+            <h3 class="bcard-title">Export Backup</h3>
+            <p class="bcard-desc">Download all your data as a JSON file. Keep it safe on your computer, USB, or cloud storage.</p>
+            <div class="bcard-stats" id="exportStats"></div>
+            <div class="bcard-options">
+              <label class="bcard-option-row">
+                <input type="checkbox" id="exportHabits" checked/>
+                <span class="check-box"></span>
+                <span>Habits & Streaks</span>
+              </label>
+              <label class="bcard-option-row">
+                <input type="checkbox" id="exportTrades" checked/>
+                <span class="check-box"></span>
+                <span>Forex Trades</span>
+              </label>
+              <label class="bcard-option-row">
+                <input type="checkbox" id="exportGoals" checked/>
+                <span class="check-box"></span>
+                <span>Goals</span>
+              </label>
+              <label class="bcard-option-row">
+                <input type="checkbox" id="exportNotes" checked/>
+                <span class="check-box"></span>
+                <span>Notes</span>
+              </label>
+              <label class="bcard-option-row">
+                <input type="checkbox" id="exportReflections" checked/>
+                <span class="check-box"></span>
+                <span>Reflections</span>
+              </label>
+              <label class="bcard-option-row">
+                <input type="checkbox" id="exportMoods" checked/>
+                <span class="check-box"></span>
+                <span>Mood Logs</span>
+              </label>
+            </div>
+            <button class="btn btn-primary backup-btn" id="exportDataBtn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Backup
+            </button>
+          </div>
+
+          <!-- IMPORT CARD -->
+          <div class="backup-card backup-card-import">
+            <div class="bcard-icon-wrap import-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <h3 class="bcard-title">Import / Restore</h3>
+            <p class="bcard-desc">Restore a previous backup or transfer data from another device. Your current data will be merged or replaced.</p>
+
+            <div class="import-drop-zone" id="importDropZone">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <p>Drop your backup JSON file here</p>
+              <span>or</span>
+              <label class="btn btn-ghost import-file-label">
+                Browse File
+                <input type="file" id="importFileInput" accept=".json" style="display:none"/>
+              </label>
+            </div>
+
+            <div class="import-preview" id="importPreview" style="display:none">
+              <div class="import-preview-header">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span id="importFileName">backup.json</span>
+              </div>
+              <div class="import-preview-stats" id="importPreviewStats"></div>
+              <div class="import-mode-select">
+                <label class="form-label">Import Mode</label>
+                <div class="import-mode-btns">
+                  <button class="imode-btn active" data-mode="merge">🔀 Merge (recommended)</button>
+                  <button class="imode-btn" data-mode="replace">🔄 Replace All</button>
+                </div>
+                <p class="import-mode-desc" id="importModeDesc">Merge adds new data without removing existing entries.</p>
+              </div>
+              <button class="btn btn-primary backup-btn" id="confirmImportBtn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                Restore Backup
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- DATA OVERVIEW -->
+        <div class="data-overview-section">
+          <h3 class="section-title">Data Overview</h3>
+          <div class="data-overview-grid" id="dataOverviewGrid"></div>
+        </div>
+
+        <!-- QUICK ACTIONS -->
+        <div class="quick-actions-section">
+          <h3 class="section-title">Quick Actions</h3>
+          <div class="quick-actions-grid">
+            <button class="qa-btn" id="exportHabitsOnly">
+              <span class="qa-icon">✅</span>
+              <span class="qa-label">Export Habits Only</span>
+            </button>
+            <button class="qa-btn" id="exportTradesOnly">
+              <span class="qa-icon">📈</span>
+              <span class="qa-label">Export Trades Only</span>
+            </button>
+            <button class="qa-btn" id="exportNotesOnly">
+              <span class="qa-icon">📓</span>
+              <span class="qa-label">Export Notes Only</span>
+            </button>
+            <button class="qa-btn danger-qa" id="clearAllDataBtn">
+              <span class="qa-icon">🗑️</span>
+              <span class="qa-label">Clear All Data</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- PORTABILITY GUIDE -->
+        <div class="portability-guide">
+          <h3 class="section-title">📦 Portability Guide</h3>
+          <div class="portability-steps">
+            <div class="port-step">
+              <div class="port-step-num">1</div>
+              <div class="port-step-text">
+                <strong>Export</strong>
+                <p>Click "Download Backup" to save a <code>lifeos-backup.json</code> file.</p>
+              </div>
+            </div>
+            <div class="port-step-arrow">→</div>
+            <div class="port-step">
+              <div class="port-step-num">2</div>
+              <div class="port-step-text">
+                <strong>Transfer</strong>
+                <p>Copy the entire <code>LifeTradingOS/</code> folder + the JSON backup to your new device.</p>
+              </div>
+            </div>
+            <div class="port-step-arrow">→</div>
+            <div class="port-step">
+              <div class="port-step-num">3</div>
+              <div class="port-step-text">
+                <strong>Open</strong>
+                <p>Open <code>index.html</code> in your browser on the new device.</p>
+              </div>
+            </div>
+            <div class="port-step-arrow">→</div>
+            <div class="port-step">
+              <div class="port-step-num">4</div>
+              <div class="port-step-text">
+                <strong>Import</strong>
+                <p>Go to Backup Center → Import → select your JSON → Restore. Done!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      <!-- ===================== END BACKUP CENTER ===================== -->
+
+    </main>
+  </div>
+
+  <!-- ADD / EDIT HABIT MODAL -->
+  <div class="modal-overlay" id="habitModalOverlay">
+    <div class="modal" id="habitModal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="habitModalTitle">Add New Habit</h3>
+        <button class="modal-close" id="closeHabitModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="habitEditId" />
+
+        <div class="form-group">
+          <label class="form-label">Habit Name *</label>
+          <input type="text" class="form-input" id="habitName" placeholder="e.g. Morning Meditation" maxlength="60" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select class="form-input" id="habitCategory">
+              <option value="health">🏥 Health</option>
+              <option value="study">📚 Study</option>
+              <option value="forex">📈 Forex</option>
+              <option value="fitness">💪 Fitness</option>
+              <option value="religion">🤲 Religion</option>
+              <option value="reading">📖 Reading</option>
+              <option value="custom">⚡ Custom</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Target (per day)</label>
+            <input type="number" class="form-input" id="habitTarget" value="1" min="1" max="20" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Description (optional)</label>
+          <input type="text" class="form-input" id="habitDesc" placeholder="What does completing this look like?" maxlength="120" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Reminder Note (optional)</label>
+          <input type="text" class="form-input" id="habitReminder" placeholder="Why this habit matters to you" maxlength="120" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Color Tag</label>
+          <div class="color-picker" id="colorPicker">
+            <button class="color-opt active" data-color="#4f9eff" style="background:#4f9eff"></button>
+            <button class="color-opt" data-color="#34d399" style="background:#34d399"></button>
+            <button class="color-opt" data-color="#a78bfa" style="background:#a78bfa"></button>
+            <button class="color-opt" data-color="#fb923c" style="background:#fb923c"></button>
+            <button class="color-opt" data-color="#f472b6" style="background:#f472b6"></button>
+            <button class="color-opt" data-color="#fbbf24" style="background:#fbbf24"></button>
+            <button class="color-opt" data-color="#f87171" style="background:#f87171"></button>
+            <button class="color-opt" data-color="#22d3ee" style="background:#22d3ee"></button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelHabitModal">Cancel</button>
+        <button class="btn btn-primary" id="saveHabitBtn">Save Habit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRM MODAL -->
+  <div class="modal-overlay" id="deleteModalOverlay">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h3 class="modal-title">Delete Habit</h3>
+        <button class="modal-close" id="closeDeleteModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color:var(--text2);font-size:14px;">Are you sure you want to delete <strong id="deleteHabitName"></strong>? This will remove all completion history.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelDeleteModal">Cancel</button>
+        <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== ADD/EDIT TRADE MODAL ===================== -->
+  <div class="modal-overlay" id="tradeModalOverlay">
+    <div class="modal modal-xl" id="tradeModal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="tradeModalTitle">Log New Trade</h3>
+        <button class="modal-close" id="closeTradeModal">&times;</button>
+      </div>
+      <div class="modal-body modal-body-scroll">
+
+        <!-- ROW 1: Pair, Direction, TF, Date -->
+        <div class="form-row-4">
+          <div class="form-group">
+            <label class="form-label">Pair *</label>
+            <select class="form-input" id="tradePair">
+              <option value="">Select Pair</option>
+              <option>EURUSD</option><option>GBPUSD</option><option>USDJPY</option>
+              <option>XAUUSD</option><option>USDCAD</option><option>AUDUSD</option>
+              <option>NZDUSD</option><option>USDCHF</option><option>GBPJPY</option>
+              <option>EURJPY</option><option>EURGBP</option><option>GBPCAD</option>
+              <option>CADJPY</option><option>AUDCAD</option><option>CUSTOM</option>
+            </select>
+          </div>
+          <div class="form-group" id="customPairGroup" style="display:none">
+            <label class="form-label">Custom Pair</label>
+            <input type="text" class="form-input" id="tradeCustomPair" placeholder="e.g. BTCUSD" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Direction *</label>
+            <div class="dir-toggle">
+              <button class="dir-btn active" data-dir="buy">📈 Buy</button>
+              <button class="dir-btn" data-dir="sell">📉 Sell</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Timeframe</label>
+            <select class="form-input" id="tradeTF">
+              <option>Daily</option><option>H4</option><option>H1</option>
+              <option>M15</option><option>M5</option><option>Weekly</option><option>Monthly</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Date *</label>
+            <input type="date" class="form-input" id="tradeDate" />
+          </div>
+        </div>
+
+        <!-- ROW 2: Entry, Exit, SL, TP -->
+        <div class="form-row-4">
+          <div class="form-group">
+            <label class="form-label">Entry Price *</label>
+            <input type="number" class="form-input" id="tradeEntry" placeholder="0.00000" step="0.00001" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Exit Price</label>
+            <input type="number" class="form-input" id="tradeExit" placeholder="0.00000" step="0.00001" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Stop Loss *</label>
+            <input type="number" class="form-input" id="tradeSL" placeholder="0.00000" step="0.00001" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Take Profit</label>
+            <input type="number" class="form-input" id="tradeTP" placeholder="0.00000" step="0.00001" />
+          </div>
+        </div>
+
+        <!-- ROW 3: Lot Size, R:R, P&L, Session -->
+        <div class="form-row-4">
+          <div class="form-group">
+            <label class="form-label">Lot Size</label>
+            <input type="number" class="form-input" id="tradeLot" placeholder="0.01" step="0.01" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Risk:Reward</label>
+            <input type="number" class="form-input" id="tradeRR" placeholder="Auto-calc" step="0.1" id="tradeRR" readonly />
+          </div>
+          <div class="form-group">
+            <label class="form-label">P&L ($) *</label>
+            <input type="number" class="form-input" id="tradePnL" placeholder="+50.00 or -30.00" step="0.01" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Session</label>
+            <select class="form-input" id="tradeSession">
+              <option value="">Select</option>
+              <option>London</option><option>New York</option>
+              <option>Tokyo</option><option>Sydney</option><option>Overlap</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ANALYSIS CHECKLIST -->
+        <div class="form-group">
+          <label class="form-label">Analysis Checklist</label>
+          <div class="analysis-checklist">
+            <label class="check-item"><input type="checkbox" id="chk_monthly"/><span class="check-box"></span><span class="check-label">Monthly Analysis ✓</span></label>
+            <label class="check-item"><input type="checkbox" id="chk_weekly"/><span class="check-box"></span><span class="check-label">Weekly Analysis ✓</span></label>
+            <label class="check-item"><input type="checkbox" id="chk_daily"/><span class="check-box"></span><span class="check-label">Daily Analysis ✓</span></label>
+            <label class="check-item"><input type="checkbox" id="chk_h4"/><span class="check-box"></span><span class="check-label">H4 Analysis ✓</span></label>
+            <label class="check-item"><input type="checkbox" id="chk_h1"/><span class="check-box"></span><span class="check-label">H1 Refinement ✓</span></label>
+            <label class="check-item"><input type="checkbox" id="chk_m15"/><span class="check-box"></span><span class="check-label">M15 Entry ✓</span></label>
+            <label class="check-item"><input type="checkbox" id="chk_risk"/><span class="check-box"></span><span class="check-label">Risk Calculated ✓</span></label>
+            <label class="check-item"><input type="checkbox" id="chk_news"/><span class="check-box"></span><span class="check-label">News Checked ✓</span></label>
+          </div>
+        </div>
+
+        <!-- Psychology -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Emotional State</label>
+            <select class="form-input" id="tradeEmotion">
+              <option value="">Select</option>
+              <option>😌 Calm & Focused</option>
+              <option>😤 Frustrated</option>
+              <option>😨 Fearful</option>
+              <option>🤑 Greedy</option>
+              <option>😤 Overconfident</option>
+              <option>😴 Tired</option>
+              <option>💪 Confident</option>
+              <option>😰 Anxious</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mistakes Made</label>
+            <select class="form-input" id="tradeMistake">
+              <option value="">None</option>
+              <option>Moved SL</option>
+              <option>Early Exit</option>
+              <option>Late Entry</option>
+              <option>Overtraded</option>
+              <option>Revenge Trade</option>
+              <option>No SL Set</option>
+              <option>Chased Price</option>
+              <option>Ignored Plan</option>
+              <option>FOMO Entry</option>
+              <option>Over-leveraged</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Entry & Exit Reason -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Entry Reason *</label>
+            <textarea class="form-input form-textarea" id="tradeEntryReason" placeholder="Why did you enter this trade? Setup, confirmation signals..." rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Exit Reason</label>
+            <textarea class="form-input form-textarea" id="tradeExitReason" placeholder="Why did you exit? TP hit, SL hit, manual close..." rows="3"></textarea>
+          </div>
+        </div>
+
+        <!-- Notes & Screenshot -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Trade Notes</label>
+            <textarea class="form-input form-textarea" id="tradeNotes" placeholder="Additional observations, lessons learned..." rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Screenshot URL (optional)</label>
+            <input type="url" class="form-input" id="tradeScreenshot" placeholder="https://tradingview.com/..." />
+            <div class="form-hint">TradingView snapshot link or image URL</div>
+          </div>
+        </div>
+
+        <!-- Discipline Score -->
+        <div class="form-group">
+          <label class="form-label">Discipline Score (1–10)</label>
+          <div class="score-slider-wrap">
+            <input type="range" class="score-slider" id="tradeDiscipline" min="1" max="10" value="7" />
+            <span class="score-slider-val" id="tradeDisciplineVal">7</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelTradeModal">Cancel</button>
+        <button class="btn btn-primary" id="saveTradeBtn">Save Trade</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE TRADE CONFIRM MODAL -->
+  <div class="modal-overlay" id="deleteTradeModalOverlay">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h3 class="modal-title">Delete Trade</h3>
+        <button class="modal-close" id="closeDeleteTradeModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color:var(--text2);font-size:14px;">Delete this trade record? <strong id="deleteTradeLabel"></strong> This cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelDeleteTradeModal">Cancel</button>
+        <button class="btn btn-danger" id="confirmDeleteTradeBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW TRADE DETAIL MODAL -->
+  <div class="modal-overlay" id="viewTradeModalOverlay">
+    <div class="modal modal-xl" id="viewTradeModal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="viewTradeTitle">Trade Detail</h3>
+        <button class="modal-close" id="closeViewTradeModal">&times;</button>
+      </div>
+      <div class="modal-body modal-body-scroll" id="viewTradeBody"></div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="closeViewTradeBtn">Close</button>
+        <button class="btn btn-primary" id="editFromViewBtn">Edit Trade</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== ADD/EDIT GOAL MODAL ===================== -->
+  <div class="modal-overlay" id="goalModalOverlay">
+    <div class="modal" id="goalModal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="goalModalTitle">Add New Goal</h3>
+        <button class="modal-close" id="closeGoalModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Goal Title *</label>
+          <input type="text" class="form-input" id="goalTitle" placeholder="e.g. Achieve 70% win rate this month" maxlength="100"/>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Period</label>
+            <select class="form-input" id="goalPeriod">
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly" selected>Monthly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Type</label>
+            <select class="form-input" id="goalType">
+              <option value="trading">📈 Trading</option>
+              <option value="study">📚 Study</option>
+              <option value="health">🏥 Health</option>
+              <option value="personal">💫 Personal</option>
+              <option value="finance">💰 Finance</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description (optional)</label>
+          <textarea class="form-input form-textarea" id="goalDesc" rows="2" placeholder="Why is this goal important? How will you achieve it?"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Target Date</label>
+            <input type="date" class="form-input" id="goalDeadline"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Priority</label>
+            <select class="form-input" id="goalPriority">
+              <option value="high">🔴 High</option>
+              <option value="medium" selected>🟡 Medium</option>
+              <option value="low">🟢 Low</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Progress (0–100%)</label>
+          <div class="score-slider-wrap">
+            <input type="range" class="score-slider" id="goalProgress" min="0" max="100" value="0"/>
+            <span class="score-slider-val" id="goalProgressVal">0%</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelGoalModal">Cancel</button>
+        <button class="btn btn-primary" id="saveGoalBtn">Save Goal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE GOAL MODAL -->
+  <div class="modal-overlay" id="deleteGoalModalOverlay">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h3 class="modal-title">Delete Goal</h3>
+        <button class="modal-close" id="closeDeleteGoalModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color:var(--text2);font-size:14px;">Delete goal: <strong id="deleteGoalName"></strong>? This cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelDeleteGoalModal">Cancel</button>
+        <button class="btn btn-danger" id="confirmDeleteGoalBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== ADD/EDIT NOTE MODAL ===================== -->
+  <div class="modal-overlay" id="noteModalOverlay">
+    <div class="modal modal-xl" id="noteModal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="noteModalTitle">New Note</h3>
+        <button class="modal-close" id="closeNoteModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group" style="flex:2">
+            <label class="form-label">Title *</label>
+            <input type="text" class="form-input" id="noteTitle" placeholder="Note title..." maxlength="100"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select class="form-input" id="noteCategory">
+              <option value="quick">⚡ Quick</option>
+              <option value="learning">📚 Learning</option>
+              <option value="forex">📈 Forex</option>
+              <option value="personal">💫 Personal</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Content *</label>
+          <textarea class="form-input form-textarea" id="noteContent" rows="10" placeholder="Write your note here..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tags (comma separated)</label>
+          <input type="text" class="form-input" id="noteTags" placeholder="e.g. trading, psychology, lesson"/>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelNoteModal">Cancel</button>
+        <button class="btn btn-primary" id="saveNoteBtn">Save Note</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE NOTE MODAL -->
+  <div class="modal-overlay" id="deleteNoteModalOverlay">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h3 class="modal-title">Delete Note</h3>
+        <button class="modal-close" id="closeDeleteNoteModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color:var(--text2);font-size:14px;">Delete note: <strong id="deleteNoteName"></strong>? This cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelDeleteNoteModal">Cancel</button>
+        <button class="btn btn-danger" id="confirmDeleteNoteBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLEAR ALL DATA CONFIRM MODAL -->
+  <div class="modal-overlay" id="clearDataModalOverlay">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h3 class="modal-title">⚠️ Clear All Data</h3>
+        <button class="modal-close" id="closeClearDataModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color:var(--text2);font-size:14px;margin-bottom:12px">This will permanently delete <strong>all your data</strong> — habits, trades, goals, notes, reflections, and moods.</p>
+        <p style="color:var(--red);font-size:13px;font-weight:600">⚠️ This action cannot be undone. Export a backup first!</p>
+        <div class="form-group" style="margin-top:16px">
+          <label class="form-label">Type DELETE to confirm</label>
+          <input type="text" class="form-input" id="clearDataConfirmInput" placeholder="DELETE"/>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelClearDataModal">Cancel</button>
+        <button class="btn btn-danger" id="confirmClearDataBtn">Clear Everything</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== ADD/EDIT RULE MODAL ===================== -->
+  <div class="modal-overlay" id="ruleModalOverlay">
+    <div class="modal" id="ruleModal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="ruleModalTitle">Add Trading Rule</h3>
+        <button class="modal-close" id="closeRuleModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Rule Title *</label>
+          <input type="text" class="form-input" id="ruleTitle" placeholder="e.g. Never move Stop Loss" maxlength="100"/>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select class="form-input" id="ruleCategory">
+              <option value="entry">📈 Entry</option>
+              <option value="exit">📉 Exit</option>
+              <option value="risk">⚖️ Risk</option>
+              <option value="psychology">🧠 Psychology</option>
+              <option value="general">⚡ General</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Priority</label>
+            <select class="form-input" id="rulePriority">
+              <option value="critical">🔴 Critical</option>
+              <option value="high">🟡 High</option>
+              <option value="medium" selected>🟢 Medium</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description (Why this rule matters)</label>
+          <textarea class="form-input form-textarea" id="ruleDesc" rows="3" placeholder="Explain why this rule is important for your trading..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Consequence if broken</label>
+          <input type="text" class="form-input" id="ruleConsequence" placeholder="e.g. Stop trading for the day" maxlength="120"/>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelRuleModal">Cancel</button>
+        <button class="btn btn-primary" id="saveRuleBtn">Save Rule</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE RULE MODAL -->
+  <div class="modal-overlay" id="deleteRuleModalOverlay">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h3 class="modal-title">Delete Rule</h3>
+        <button class="modal-close" id="closeDeleteRuleModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color:var(--text2);font-size:14px;">Delete rule: <strong id="deleteRuleName"></strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelDeleteRuleModal">Cancel</button>
+        <button class="btn btn-danger" id="confirmDeleteRuleBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOG RULE BREAK MODAL -->
+  <div class="modal-overlay" id="ruleBreakModalOverlay">
+    <div class="modal" id="ruleBreakModal">
+      <div class="modal-header">
+        <h3 class="modal-title">Log Rule Break ⚠️</h3>
+        <button class="modal-close" id="closeRuleBreakModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Which Rule Did You Break? *</label>
+          <select class="form-input" id="breakRuleSelect">
+            <option value="">Select a rule...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date</label>
+          <input type="date" class="form-input" id="breakDate"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">What Happened?</label>
+          <textarea class="form-input form-textarea" id="breakDescription" rows="3" placeholder="Describe what happened and why you broke the rule..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Emotional State at the Time</label>
+          <select class="form-input" id="breakEmotion">
+            <option value="">Select...</option>
+            <option>😤 Frustrated</option>
+            <option>🤑 Greedy</option>
+            <option>😨 Fearful</option>
+            <option>😴 Tired</option>
+            <option>😤 Overconfident</option>
+            <option>😰 Anxious</option>
+            <option>🤔 Impatient</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Lesson Learned</label>
+          <textarea class="form-input form-textarea" id="breakLesson" rows="2" placeholder="What will you do differently next time?"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelRuleBreakModal">Cancel</button>
+        <button class="btn btn-danger" id="saveRuleBreakBtn">Log Break</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD CHECKLIST ITEM MODAL -->
+  <div class="modal-overlay" id="checklistItemModalOverlay">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h3 class="modal-title">Add Checklist Item</h3>
+        <button class="modal-close" id="closeChecklistItemModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Checklist Item *</label>
+          <input type="text" class="form-input" id="checklistItemText" placeholder="e.g. HTF trend confirmed?" maxlength="100"/>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelChecklistItemModal">Cancel</button>
+        <button class="btn btn-primary" id="saveChecklistItemBtn">Add Item</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS MODULES -->
+  <script src="js/storage.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/habits.js"></script>
+  <script src="js/forex.js"></script>
+  <script src="js/goals.js"></script>
+  <script src="js/notes.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/reports.js"></script>
+  <script src="js/backup.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/lock.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
