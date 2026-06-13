@@ -4,10 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Life & Trading Performance OS</title>
+
+  <!-- PWA Meta Tags -->
+  <meta name="description" content="Personal OS for traders — Habits, Forex Journal, Goals, Analytics" />
+  <meta name="theme-color" content="#3b82f6" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="LifeOS" />
+
+  <!-- PWA Icons -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144.png" />
+
   <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Register Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/LifetradingOs/sw.js')
+          .then(() => console.log('✅ Service Worker registered'))
+          .catch(err => console.log('SW error:', err));
+      });
+    }
+  </script>
 </head>
 <body>
 
@@ -383,21 +410,123 @@
             </div>
           </div>
 
-          <!-- TODAY'S CHECKLIST -->
-          <div class="dash-card">
+          <!-- TODAY'S CHECKLIST — UPGRADED -->
+          <div class="dash-card daily-checklist-card">
             <div class="dash-card-header">
               <h3 class="dash-card-title">Daily Checklist</h3>
-              <span class="dash-card-badge" id="checklistCount">0/7</span>
+              <div class="checklist-header-right">
+                <div class="checklist-progress-ring-wrap">
+                  <svg width="36" height="36" viewBox="0 0 36 36">
+                    <circle cx="18" cy="18" r="14" fill="none" stroke="var(--surface2)" stroke-width="3"/>
+                    <circle cx="18" cy="18" r="14" fill="none" stroke="var(--accent)" stroke-width="3"
+                      stroke-dasharray="87.96" stroke-dashoffset="87.96"
+                      stroke-linecap="round" transform="rotate(-90 18 18)"
+                      id="checklistRing" style="transition:stroke-dashoffset 0.5s ease"/>
+                  </svg>
+                  <span class="checklist-ring-pct" id="checklistRingPct">0%</span>
+                </div>
+                <span class="dash-card-badge" id="checklistCount">0/7</span>
+              </div>
             </div>
-            <div class="checklist" id="dailyChecklist">
-              <label class="check-item"><input type="checkbox" data-key="morning_routine"/><span class="check-box"></span><span class="check-label">Morning Routine</span></label>
-              <label class="check-item"><input type="checkbox" data-key="trade_analysis"/><span class="check-box"></span><span class="check-label">Trade Analysis Done</span></label>
-              <label class="check-item"><input type="checkbox" data-key="study_session"/><span class="check-box"></span><span class="check-label">Study Session</span></label>
-              <label class="check-item"><input type="checkbox" data-key="exercise"/><span class="check-box"></span><span class="check-label">Exercise</span></label>
-              <label class="check-item"><input type="checkbox" data-key="reading"/><span class="check-box"></span><span class="check-label">Reading</span></label>
-              <label class="check-item"><input type="checkbox" data-key="journal_entry"/><span class="check-box"></span><span class="check-label">Journal Entry</span></label>
-              <label class="check-item"><input type="checkbox" data-key="evening_review"/><span class="check-box"></span><span class="check-label">Evening Review</span></label>
+
+            <!-- Progress Bar -->
+            <div class="checklist-prog-bar-wrap">
+              <div class="checklist-prog-bar">
+                <div class="checklist-prog-fill" id="checklistProgFill" style="width:0%"></div>
+              </div>
             </div>
+
+            <!-- Checklist Items -->
+            <div class="checklist-new" id="dailyChecklist">
+
+              <label class="check-item-new" data-key="morning_routine">
+                <input type="checkbox" data-key="morning_routine"/>
+                <span class="check-box-new">
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="check-item-icon">🌅</span>
+                <span class="check-item-label">Morning Routine</span>
+                <span class="check-item-time">6:00 AM</span>
+              </label>
+
+              <label class="check-item-new" data-key="namaz">
+                <input type="checkbox" data-key="namaz"/>
+                <span class="check-box-new">
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="check-item-icon">🤲</span>
+                <span class="check-item-label">Namaz / Prayer</span>
+                <span class="check-item-time">Fajr</span>
+              </label>
+
+              <label class="check-item-new" data-key="trade_analysis">
+                <input type="checkbox" data-key="trade_analysis"/>
+                <span class="check-box-new">
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="check-item-icon">📈</span>
+                <span class="check-item-label">Forex Analysis</span>
+                <span class="check-item-time">Morning</span>
+              </label>
+
+              <label class="check-item-new" data-key="study_session">
+                <input type="checkbox" data-key="study_session"/>
+                <span class="check-box-new">
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="check-item-icon">📚</span>
+                <span class="check-item-label">Study Session</span>
+                <span class="check-item-time">1hr+</span>
+              </label>
+
+              <label class="check-item-new" data-key="exercise">
+                <input type="checkbox" data-key="exercise"/>
+                <span class="check-box-new">
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="check-item-icon">💪</span>
+                <span class="check-item-label">Exercise</span>
+                <span class="check-item-time">30min</span>
+              </label>
+
+              <label class="check-item-new" data-key="reading">
+                <input type="checkbox" data-key="reading"/>
+                <span class="check-box-new">
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="check-item-icon">📖</span>
+                <span class="check-item-label">Reading</span>
+                <span class="check-item-time">30min</span>
+              </label>
+
+              <label class="check-item-new" data-key="journal_entry">
+                <input type="checkbox" data-key="journal_entry"/>
+                <span class="check-box-new">
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="check-item-icon">📝</span>
+                <span class="check-item-label">Journal Entry</span>
+                <span class="check-item-time">Evening</span>
+              </label>
+
+              <label class="check-item-new" data-key="evening_review">
+                <input type="checkbox" data-key="evening_review"/>
+                <span class="check-box-new">
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="check-item-icon">🌙</span>
+                <span class="check-item-label">Evening Review</span>
+                <span class="check-item-time">Night</span>
+              </label>
+
+            </div>
+
+            <!-- Completion Message -->
+            <div class="checklist-complete-msg" id="checklistCompleteMsg" style="display:none">
+              <span>🎉</span>
+              <strong>Perfect Day! All tasks done!</strong>
+            </div>
+
           </div>
 
           <!-- QUICK STATS -->

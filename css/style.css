@@ -2655,3 +2655,195 @@ select.form-input { cursor: pointer; }
   .pretrade-header   { flex-direction: column; align-items: flex-start; }
   .rule-card-actions { opacity: 1; }
 }
+
+/* ============================================
+   UPGRADED DAILY CHECKLIST
+   ============================================ */
+
+.daily-checklist-card { overflow: visible; }
+
+/* Header right side */
+.checklist-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Mini ring */
+.checklist-progress-ring-wrap {
+  position: relative;
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.checklist-ring-pct {
+  position: absolute;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* Progress bar under header */
+.checklist-prog-bar-wrap {
+  margin-bottom: 14px;
+}
+
+.checklist-prog-bar {
+  height: 5px;
+  background: var(--surface2);
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.checklist-prog-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transition: width 0.5s cubic-bezier(.4,0,.2,1), background 0.3s;
+}
+
+/* New Checklist Items */
+.checklist-new {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.check-item-new {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 11px;
+  cursor: pointer;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  transition: all 0.2s cubic-bezier(.4,0,.2,1);
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.check-item-new::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0;
+  background: var(--green-glow);
+  transition: width 0.4s ease;
+  border-radius: 11px;
+}
+
+.check-item-new:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+  transform: translateX(3px);
+}
+
+.check-item-new.checked {
+  background: var(--green-glow);
+  border-color: var(--green);
+  opacity: 0.8;
+}
+
+.check-item-new.checked::before {
+  width: 100%;
+}
+
+.check-item-new input[type="checkbox"] { display: none; }
+
+/* Custom checkbox */
+.check-box-new {
+  width: 20px; height: 20px;
+  border-radius: 6px;
+  border: 2px solid var(--border2);
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s cubic-bezier(.34,1.56,.64,1);
+}
+
+.check-box-new svg { opacity: 0; transition: opacity 0.15s; }
+
+.check-item-new.checked .check-box-new {
+  background: var(--green);
+  border-color: var(--green);
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(16,185,129,0.4);
+}
+
+.check-item-new.checked .check-box-new svg { opacity: 1; }
+
+/* Emoji icon */
+.check-item-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.check-item-new:hover .check-item-icon { transform: scale(1.2); }
+
+/* Label */
+.check-item-label {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+  transition: all 0.2s;
+}
+
+.check-item-new.checked .check-item-label {
+  text-decoration: line-through;
+  color: var(--text3);
+}
+
+/* Time badge */
+.check-item-time {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 2px 7px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.check-item-new.checked .check-item-time {
+  background: var(--green-glow);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+/* Completion message */
+.checklist-complete-msg {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: var(--green-glow);
+  border: 1px solid var(--green);
+  border-radius: 11px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+  animation: completePulse 0.5s cubic-bezier(.34,1.56,.64,1);
+}
+
+@keyframes completePulse {
+  from { transform: scale(0.95); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .check-item-time  { display: none; }
+  .check-item-new   { padding: 9px 10px; }
+  .check-item-label { font-size: 12px; }
+}

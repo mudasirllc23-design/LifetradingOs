@@ -44,19 +44,30 @@ const Dashboard = (() => {
 
     checkboxes.forEach(cb => {
       const key = cb.dataset.key;
-      if (saved[key]) cb.checked = true;
+      if (saved[key]) {
+        cb.checked = true;
+        const label = cb.closest('.check-item-new');
+        if (label) label.classList.add('checked');
+      }
 
       cb.addEventListener('change', () => {
         const current = Storage.getTodayChecklist();
         current[cb.dataset.key] = cb.checked;
         Storage.saveTodayChecklist(current);
+
+        // Toggle checked class on parent
+        const label = cb.closest('.check-item-new');
+        if (label) label.classList.toggle('checked', cb.checked);
+
         updateChecklistCount();
 
         if (cb.checked) {
+          const labelEl = cb.closest('.check-item-new')?.querySelector('.check-item-label');
+          const labelText = labelEl ? labelEl.textContent : cb.dataset.key;
           Storage.addActivity({
             icon: '✅',
-            text: `Completed: ${cb.closest('.check-item').querySelector('.check-label').textContent}`,
-            color: '#34d399'
+            text: `Completed: ${labelText}`,
+            color: '#10b981'
           });
           renderActivity();
         }
@@ -68,9 +79,40 @@ const Dashboard = (() => {
 
   function updateChecklistCount() {
     const checkboxes = document.querySelectorAll('#dailyChecklist input[type="checkbox"]');
-    const checked = document.querySelectorAll('#dailyChecklist input[type="checkbox"]:checked');
+    const checkedEls = document.querySelectorAll('#dailyChecklist input[type="checkbox"]:checked');
+    const total   = checkboxes.length;
+    const checked = checkedEls.length;
+    const pct     = total > 0 ? Math.round((checked / total) * 100) : 0;
+
+    // Badge
     const badge = document.getElementById('checklistCount');
-    if (badge) badge.textContent = `${checked.length}/${checkboxes.length}`;
+    if (badge) badge.textContent = `${checked}/${total}`;
+
+    // Progress bar
+    const fill = document.getElementById('checklistProgFill');
+    if (fill) {
+      fill.style.width = pct + '%';
+      fill.style.background = pct === 100
+        ? 'var(--green)'
+        : pct >= 60
+        ? 'linear-gradient(90deg, var(--accent), var(--accent2))'
+        : 'linear-gradient(90deg, var(--accent), var(--accent-light))';
+    }
+
+    // Ring
+    const ring = document.getElementById('checklistRing');
+    const ringPct = document.getElementById('checklistRingPct');
+    if (ring) {
+      const circumference = 87.96;
+      const offset = circumference - (pct / 100) * circumference;
+      ring.style.strokeDashoffset = offset;
+      ring.style.stroke = pct === 100 ? 'var(--green)' : 'var(--accent)';
+    }
+    if (ringPct) ringPct.textContent = pct + '%';
+
+    // Completion message
+    const msg = document.getElementById('checklistCompleteMsg');
+    if (msg) msg.style.display = pct === 100 ? 'flex' : 'none';
   }
 
   // ---------- HABITS SUMMARY ----------
