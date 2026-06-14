@@ -38,7 +38,100 @@
 </head>
 <body>
 
-  <!-- ===================== PIN LOCK SCREEN ===================== -->
+  <!-- ===================== ONBOARDING SCREEN ===================== -->
+  <div class="onboarding-screen" id="onboardingScreen" style="display:none">
+    <div class="onboarding-card" id="onboardingCard">
+
+      <!-- Step 1 — Welcome -->
+      <div class="ob-step active" id="ob-step-1">
+        <div class="ob-logo">
+          <div class="pin-logo-icon">
+            <svg width="32" height="32" viewBox="0 0 28 28" fill="none">
+              <rect x="2" y="2" width="10" height="10" rx="2" fill="white" opacity="0.9"/>
+              <rect x="16" y="2" width="10" height="10" rx="2" fill="white" opacity="0.6"/>
+              <rect x="2" y="16" width="10" height="10" rx="2" fill="white" opacity="0.6"/>
+              <rect x="16" y="16" width="10" height="10" rx="2" fill="white" opacity="0.9"/>
+            </svg>
+          </div>
+        </div>
+        <h1 class="ob-title">Welcome to <span class="ob-brand">LifeOS</span></h1>
+        <p class="ob-subtitle">Your Personal Trading & Life Performance System</p>
+        <div class="ob-features">
+          <div class="ob-feature"><span>📈</span><span>Forex Trading Journal</span></div>
+          <div class="ob-feature"><span>✅</span><span>Habit Tracker</span></div>
+          <div class="ob-feature"><span>🎯</span><span>Goals System</span></div>
+          <div class="ob-feature"><span>📊</span><span>Analytics & Reports</span></div>
+          <div class="ob-feature"><span>📋</span><span>Trading Rules</span></div>
+          <div class="ob-feature"><span>😊</span><span>Mood Tracker</span></div>
+        </div>
+        <button class="btn btn-primary ob-btn" id="ob-next-1">Get Started →</button>
+      </div>
+
+      <!-- Step 2 — Name -->
+      <div class="ob-step" id="ob-step-2">
+        <div class="ob-emoji">👋</div>
+        <h2 class="ob-title">What's your name?</h2>
+        <p class="ob-subtitle">We'll personalize your experience just for you.</p>
+        <div class="ob-input-wrap">
+          <input type="text" class="form-input ob-input" id="obNameInput" placeholder="Enter your name..." maxlength="30" autocomplete="off"/>
+        </div>
+        <button class="btn btn-primary ob-btn" id="ob-next-2">Continue →</button>
+      </div>
+
+      <!-- Step 3 — Trading Experience -->
+      <div class="ob-step" id="ob-step-3">
+        <div class="ob-emoji">📈</div>
+        <h2 class="ob-title">Your Trading Level?</h2>
+        <p class="ob-subtitle">This helps us show relevant tips for you.</p>
+        <div class="ob-options">
+          <button class="ob-option" data-val="beginner">🌱 Beginner<span>Just starting out</span></button>
+          <button class="ob-option" data-val="intermediate">📊 Intermediate<span>1-2 years experience</span></button>
+          <button class="ob-option" data-val="advanced">🏆 Advanced<span>3+ years experience</span></button>
+        </div>
+        <button class="btn btn-primary ob-btn" id="ob-next-3" style="opacity:0.5">Continue →</button>
+      </div>
+
+      <!-- Step 4 — Goal -->
+      <div class="ob-step" id="ob-step-4">
+        <div class="ob-emoji">🎯</div>
+        <h2 class="ob-title">Your Main Goal?</h2>
+        <p class="ob-subtitle">What do you want to achieve with LifeOS?</p>
+        <div class="ob-options">
+          <button class="ob-option" data-val="discipline">🔥 Build Discipline<span>Daily habits & consistency</span></button>
+          <button class="ob-option" data-val="trading">💰 Improve Trading<span>Better results & journal</span></button>
+          <button class="ob-option" data-val="both">⚡ Both<span>Complete self improvement</span></button>
+        </div>
+        <button class="btn btn-primary ob-btn" id="ob-next-4" style="opacity:0.5">Continue →</button>
+      </div>
+
+      <!-- Step 5 — All Done -->
+      <div class="ob-step" id="ob-step-5">
+        <div class="ob-success-icon">🎉</div>
+        <h2 class="ob-title ob-success-title">You're All Set, <span id="obFinalName">Friend</span>!</h2>
+        <p class="ob-subtitle">Your personalized LifeOS is ready. Let's build discipline and achieve your goals together!</p>
+        <div class="ob-tips-final">
+          <div class="ob-tip-item">1️⃣ Add your daily habits first</div>
+          <div class="ob-tip-item">2️⃣ Set your trading rules</div>
+          <div class="ob-tip-item">3️⃣ Log every trade you take</div>
+          <div class="ob-tip-item">4️⃣ Export backup every Sunday</div>
+        </div>
+        <button class="btn btn-primary ob-btn" id="ob-finish">
+          🚀 Launch LifeOS
+        </button>
+      </div>
+
+      <!-- Progress dots -->
+      <div class="ob-progress">
+        <div class="ob-dot active" data-step="1"></div>
+        <div class="ob-dot" data-step="2"></div>
+        <div class="ob-dot" data-step="3"></div>
+        <div class="ob-dot" data-step="4"></div>
+        <div class="ob-dot" data-step="5"></div>
+      </div>
+
+    </div>
+  </div>
+  <!-- ===================== END ONBOARDING ===================== -->
   <div class="pin-lock-screen" id="pinLockScreen">
     <div class="pin-lock-card">
 
@@ -285,40 +378,92 @@
     <!-- PAGE CONTENT -->
     <main class="content" id="mainContent">
 
-      <!-- DASHBOARD PAGE -->
+      <!-- DASHBOARD PAGE — ADVANCED -->
       <section class="page active" id="page-dashboard">
 
-        <div class="page-header">
-          <div>
-            <h1 class="page-title">Good <span id="timeGreeting">Morning</span> 👋</h1>
-            <p class="page-subtitle">Here's your performance overview for today.</p>
+        <!-- HERO WELCOME BANNER -->
+        <div class="hero-banner">
+          <div class="hero-left">
+            <div class="hero-greeting" id="heroGreeting">Good Morning ☀️</div>
+            <h1 class="hero-title">Welcome back, <span class="hero-name" id="heroUserName">Friend!</span></h1>
+            <p class="hero-quote" id="heroDailyQuote"></p>
           </div>
-          <div class="today-badge">
-            <span id="todayFull"></span>
+          <div class="hero-right">
+            <div class="hero-date-card">
+              <div class="hero-date-day" id="heroDayName"></div>
+              <div class="hero-date-num" id="heroDayNum"></div>
+              <div class="hero-date-month" id="heroMonthYear"></div>
+            </div>
           </div>
         </div>
 
-        <!-- SCORE CARDS ROW -->
+        <!-- STREAK BANNER -->
+        <div class="streak-banner" id="streakBanner" style="display:none">
+          <span class="streak-fire">🔥</span>
+          <div class="streak-text">
+            <strong id="streakBannerText">7 Day Streak!</strong>
+            <span>Keep going — consistency is your superpower!</span>
+          </div>
+          <span class="streak-badge" id="streakBannerDays">7</span>
+        </div>
+
+        <!-- QUICK ACTIONS -->
+        <div class="quick-actions-bar">
+          <button class="qa-action-btn" data-page="forex">
+            <span>📈</span> Log Trade
+          </button>
+          <button class="qa-action-btn" data-page="habits">
+            <span>✅</span> Habits
+          </button>
+          <button class="qa-action-btn" data-page="reflection">
+            <span>📝</span> Reflect
+          </button>
+          <button class="qa-action-btn" data-page="mood">
+            <span>😊</span> Mood
+          </button>
+          <button class="qa-action-btn" data-page="goals">
+            <span>🎯</span> Goals
+          </button>
+          <button class="qa-action-btn" data-page="rules">
+            <span>📋</span> Rules
+          </button>
+        </div>
+
+        <!-- SCORE CARDS ROW — ANIMATED -->
         <div class="score-row">
           <div class="score-card score-discipline">
             <div class="score-card-label">Discipline Score</div>
-            <div class="score-card-value" id="disciplineScore">—</div>
+            <div class="score-card-value animated-num" id="disciplineScore">—</div>
             <div class="score-card-sub">Today</div>
+            <div class="score-card-trend" id="disciplineTrend"></div>
           </div>
           <div class="score-card score-productivity">
             <div class="score-card-label">Productivity</div>
-            <div class="score-card-value" id="productivityScore">—</div>
+            <div class="score-card-value animated-num" id="productivityScore">—</div>
             <div class="score-card-sub">Today</div>
+            <div class="score-card-trend" id="productivityTrend"></div>
           </div>
           <div class="score-card score-mood">
             <div class="score-card-label">Mood</div>
-            <div class="score-card-value" id="moodScore">—</div>
+            <div class="score-card-value animated-num" id="moodScore">—</div>
             <div class="score-card-sub">Today</div>
           </div>
           <div class="score-card score-trading">
             <div class="score-card-label">Trading P/L</div>
-            <div class="score-card-value" id="tradingPL">$0</div>
+            <div class="score-card-value animated-num" id="tradingPL">$0</div>
             <div class="score-card-sub">This month</div>
+          </div>
+        </div>
+
+        <!-- TODAY'S FOCUS -->
+        <div class="todays-focus" id="todaysFocusCard" style="display:none">
+          <div class="focus-label">🎯 Today's Main Goal</div>
+          <div class="focus-title" id="focusGoalTitle"></div>
+          <div class="focus-progress">
+            <div class="focus-bar">
+              <div class="focus-fill" id="focusGoalFill" style="width:0%"></div>
+            </div>
+            <span class="focus-pct" id="focusGoalPct">0%</span>
           </div>
         </div>
 
@@ -334,10 +479,15 @@
             <div class="habit-progress-wrap">
               <div class="habit-ring-wrap">
                 <svg class="habit-ring" viewBox="0 0 80 80">
+                  <defs>
+                    <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style="stop-color:#3b82f6"/>
+                      <stop offset="100%" style="stop-color:#8b5cf6"/>
+                    </linearGradient>
+                  </defs>
                   <circle class="ring-bg" cx="40" cy="40" r="32" />
                   <circle class="ring-fill" id="habitRingFill" cx="40" cy="40" r="32"
-                    stroke-dasharray="201.06"
-                    stroke-dashoffset="201.06"
+                    stroke-dasharray="201.06" stroke-dashoffset="201.06"
                     transform="rotate(-90 40 40)" />
                 </svg>
                 <div class="ring-label">
@@ -356,7 +506,7 @@
                 </div>
                 <div class="habit-stat">
                   <span class="hstat-val" id="habitStreak">0</span>
-                  <span class="hstat-label">Best Streak</span>
+                  <span class="hstat-label">🔥 Streak</span>
                 </div>
               </div>
             </div>
@@ -366,18 +516,13 @@
             </div>
           </div>
 
-          <!-- GOALS OVERVIEW -->
+          <!-- WEEKLY OVERVIEW -->
           <div class="dash-card">
             <div class="dash-card-header">
-              <h3 class="dash-card-title">Goals Overview</h3>
-              <a href="#" class="dash-card-link" data-page="goals">View All →</a>
+              <h3 class="dash-card-title">This Week</h3>
+              <span class="dash-card-badge" id="weekScoreBadge">—</span>
             </div>
-            <div class="goals-list" id="dashGoalsList">
-              <div class="empty-state">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-                <span>No goals yet. <a href="#" data-page="goals">Set your first goal →</a></span>
-              </div>
-            </div>
+            <div class="week-overview" id="weekOverview"></div>
           </div>
 
           <!-- TRADING SUMMARY -->
@@ -410,7 +555,20 @@
             </div>
           </div>
 
-          <!-- TODAY'S CHECKLIST — UPGRADED -->
+          <!-- MINI P&L CHART -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">P&L Chart</h3>
+              <span class="dash-card-sub">Last 7 trades</span>
+            </div>
+            <div class="mini-chart-wrap" id="miniPLChart">
+              <div class="empty-state" style="padding:16px">
+                <span style="font-size:12px;color:var(--text3)">No trades yet</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TODAY'S CHECKLIST -->
           <div class="dash-card daily-checklist-card">
             <div class="dash-card-header">
               <h3 class="dash-card-title">Daily Checklist</h3>
@@ -425,152 +583,123 @@
                   </svg>
                   <span class="checklist-ring-pct" id="checklistRingPct">0%</span>
                 </div>
-                <span class="dash-card-badge" id="checklistCount">0/7</span>
+                <span class="dash-card-badge" id="checklistCount">0/8</span>
               </div>
             </div>
-
-            <!-- Progress Bar -->
             <div class="checklist-prog-bar-wrap">
               <div class="checklist-prog-bar">
                 <div class="checklist-prog-fill" id="checklistProgFill" style="width:0%"></div>
               </div>
             </div>
-
-            <!-- Checklist Items -->
             <div class="checklist-new" id="dailyChecklist">
-
               <label class="check-item-new" data-key="morning_routine">
                 <input type="checkbox" data-key="morning_routine"/>
-                <span class="check-box-new">
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
-                </span>
+                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
                 <span class="check-item-icon">🌅</span>
                 <span class="check-item-label">Morning Routine</span>
                 <span class="check-item-time">6:00 AM</span>
               </label>
-
               <label class="check-item-new" data-key="namaz">
                 <input type="checkbox" data-key="namaz"/>
-                <span class="check-box-new">
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
-                </span>
+                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
                 <span class="check-item-icon">🤲</span>
                 <span class="check-item-label">Namaz / Prayer</span>
                 <span class="check-item-time">Fajr</span>
               </label>
-
               <label class="check-item-new" data-key="trade_analysis">
                 <input type="checkbox" data-key="trade_analysis"/>
-                <span class="check-box-new">
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
-                </span>
+                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
                 <span class="check-item-icon">📈</span>
                 <span class="check-item-label">Forex Analysis</span>
                 <span class="check-item-time">Morning</span>
               </label>
-
               <label class="check-item-new" data-key="study_session">
                 <input type="checkbox" data-key="study_session"/>
-                <span class="check-box-new">
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
-                </span>
+                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
                 <span class="check-item-icon">📚</span>
                 <span class="check-item-label">Study Session</span>
                 <span class="check-item-time">1hr+</span>
               </label>
-
               <label class="check-item-new" data-key="exercise">
                 <input type="checkbox" data-key="exercise"/>
-                <span class="check-box-new">
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
-                </span>
+                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
                 <span class="check-item-icon">💪</span>
                 <span class="check-item-label">Exercise</span>
                 <span class="check-item-time">30min</span>
               </label>
-
               <label class="check-item-new" data-key="reading">
                 <input type="checkbox" data-key="reading"/>
-                <span class="check-box-new">
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
-                </span>
+                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
                 <span class="check-item-icon">📖</span>
                 <span class="check-item-label">Reading</span>
                 <span class="check-item-time">30min</span>
               </label>
-
               <label class="check-item-new" data-key="journal_entry">
                 <input type="checkbox" data-key="journal_entry"/>
-                <span class="check-box-new">
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
-                </span>
+                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
                 <span class="check-item-icon">📝</span>
                 <span class="check-item-label">Journal Entry</span>
                 <span class="check-item-time">Evening</span>
               </label>
-
               <label class="check-item-new" data-key="evening_review">
                 <input type="checkbox" data-key="evening_review"/>
-                <span class="check-box-new">
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
-                </span>
+                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
                 <span class="check-item-icon">🌙</span>
                 <span class="check-item-label">Evening Review</span>
                 <span class="check-item-time">Night</span>
               </label>
-
             </div>
-
-            <!-- Completion Message -->
             <div class="checklist-complete-msg" id="checklistCompleteMsg" style="display:none">
               <span>🎉</span>
               <strong>Perfect Day! All tasks done!</strong>
             </div>
-
           </div>
 
-          <!-- QUICK STATS -->
-          <div class="dash-card dash-card-wide">
+          <!-- GOALS OVERVIEW -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">Goals Overview</h3>
+              <a href="#" class="dash-card-link" data-page="goals">View All →</a>
+            </div>
+            <div class="goals-list" id="dashGoalsList">
+              <div class="empty-state">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                <span>No goals yet. <a href="#" data-page="goals">Set your first goal →</a></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DAILY TIP -->
+          <div class="dash-card dash-card-tip">
+            <div class="tip-icon">💡</div>
+            <div class="tip-content">
+              <div class="tip-label">Trading Tip of the Day</div>
+              <div class="tip-text" id="dailyTip"></div>
+            </div>
+          </div>
+
+          <!-- PERFORMANCE METRICS -->
+          <div class="dash-card">
             <div class="dash-card-header">
               <h3 class="dash-card-title">Performance Metrics</h3>
               <span class="dash-card-sub">This month</span>
             </div>
             <div class="metrics-grid">
               <div class="metric-item">
-                <div class="metric-bar-wrap">
-                  <div class="metric-bar-label">
-                    <span>Consistency</span>
-                    <span id="consistencyPct">0%</span>
-                  </div>
-                  <div class="metric-bar"><div class="metric-fill" id="consistencyBar" style="width:0%"></div></div>
-                </div>
+                <div class="metric-bar-label"><span>Consistency</span><span id="consistencyPct">0%</span></div>
+                <div class="metric-bar"><div class="metric-fill" id="consistencyBar" style="width:0%"></div></div>
               </div>
               <div class="metric-item">
-                <div class="metric-bar-wrap">
-                  <div class="metric-bar-label">
-                    <span>Discipline</span>
-                    <span id="disciplinePct">0%</span>
-                  </div>
-                  <div class="metric-bar"><div class="metric-fill accent2" id="disciplineBar" style="width:0%"></div></div>
-                </div>
+                <div class="metric-bar-label"><span>Discipline</span><span id="disciplinePct">0%</span></div>
+                <div class="metric-bar"><div class="metric-fill accent2" id="disciplineBar" style="width:0%"></div></div>
               </div>
               <div class="metric-item">
-                <div class="metric-bar-wrap">
-                  <div class="metric-bar-label">
-                    <span>Goal Progress</span>
-                    <span id="goalPct">0%</span>
-                  </div>
-                  <div class="metric-bar"><div class="metric-fill accent3" id="goalBar" style="width:0%"></div></div>
-                </div>
+                <div class="metric-bar-label"><span>Goal Progress</span><span id="goalPct">0%</span></div>
+                <div class="metric-bar"><div class="metric-fill accent3" id="goalBar" style="width:0%"></div></div>
               </div>
               <div class="metric-item">
-                <div class="metric-bar-wrap">
-                  <div class="metric-bar-label">
-                    <span>Study Hours</span>
-                    <span id="studyHoursPct">0h</span>
-                  </div>
-                  <div class="metric-bar"><div class="metric-fill accent4" id="studyBar" style="width:0%"></div></div>
-                </div>
+                <div class="metric-bar-label"><span>Study Hours</span><span id="studyHoursPct">0h</span></div>
+                <div class="metric-bar"><div class="metric-fill accent4" id="studyBar" style="width:0%"></div></div>
               </div>
             </div>
           </div>
@@ -581,13 +710,22 @@
               <h3 class="dash-card-title">Recent Activity</h3>
             </div>
             <div class="activity-feed" id="activityFeed">
-              <div class="activity-empty">
-                <p>Your activity will appear here as you use the app.</p>
-              </div>
+              <div class="activity-empty"><p>Your activity will appear here as you use the app.</p></div>
             </div>
           </div>
 
         </div>
+
+        <!-- ACHIEVEMENT POPUP -->
+        <div class="achievement-popup" id="achievementPopup" style="display:none">
+          <div class="ach-icon" id="achIcon">🏆</div>
+          <div class="ach-body">
+            <div class="ach-title" id="achTitle">Achievement Unlocked!</div>
+            <div class="ach-desc"  id="achDesc">7 Day Habit Streak</div>
+          </div>
+          <button class="ach-close" id="achClose">✕</button>
+        </div>
+
       </section>
 
       <!-- ===================== HABIT TRACKER PAGE ===================== -->
@@ -2200,6 +2338,7 @@
   <script src="js/reports.js"></script>
   <script src="js/backup.js"></script>
   <script src="js/rules.js"></script>
+  <script src="js/onboarding.js"></script>
   <script src="js/lock.js"></script>
   <script src="js/app.js"></script>
 </body>
