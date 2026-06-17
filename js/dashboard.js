@@ -340,7 +340,7 @@ const Dashboard = (() => {
   // ---------- CHECKLIST ----------
   function renderChecklist() {
     const saved = Storage.getTodayChecklist();
-    const checkboxes = document.querySelectorAll('#dailyChecklist input[type="checkbox"]');
+    const checkboxes = document.querySelectorAll('.checklist-two-col input[type="checkbox"]');
 
     checkboxes.forEach(cb => {
       const key = cb.dataset.key;
@@ -363,12 +363,30 @@ const Dashboard = (() => {
         }
       });
     });
+
+    // Click-to-navigate for action items (Log Trade, Habits, Goals, Rules)
+    document.querySelectorAll('.check-item-action').forEach(item => {
+      const goto = item.dataset.goto;
+      const iconEl  = item.querySelector('.check-item-icon');
+      const labelEl = item.querySelector('.check-item-label');
+      const gotoEl  = item.querySelector('.check-item-goto');
+
+      [iconEl, labelEl, gotoEl].forEach(el => {
+        if (!el) return;
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', e => {
+          e.preventDefault();
+          if (goto && typeof App !== 'undefined') App.navigateTo(goto);
+        });
+      });
+    });
+
     updateChecklistCount();
   }
 
   function updateChecklistCount() {
-    const checkboxes = document.querySelectorAll('#dailyChecklist input[type="checkbox"]');
-    const checked    = document.querySelectorAll('#dailyChecklist input[type="checkbox"]:checked');
+    const checkboxes = document.querySelectorAll('.checklist-two-col input[type="checkbox"]');
+    const checked    = document.querySelectorAll('.checklist-two-col input[type="checkbox"]:checked');
     const total = checkboxes.length;
     const done  = checked.length;
     const pct   = total > 0 ? Math.round((done/total)*100) : 0;

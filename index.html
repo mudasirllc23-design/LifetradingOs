@@ -213,7 +213,7 @@
     </div>
 
     <nav class="sidebar-nav">
-      <div class="nav-section-label">Core</div>
+      <div class="nav-section-label">Main</div>
 
       <a href="#" class="nav-item active" data-page="dashboard">
         <span class="nav-icon">
@@ -235,6 +235,17 @@
         <span class="nav-badge" id="habitBadge">0</span>
       </a>
 
+      <a href="#" class="nav-item" data-page="goals">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+          </svg>
+        </span>
+        <span class="nav-label">Goals</span>
+      </a>
+
+      <div class="nav-section-label">Trading</div>
+
       <a href="#" class="nav-item" data-page="forex">
         <span class="nav-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -251,56 +262,13 @@
             <polyline points="14 2 14 8 20 8"/>
             <line x1="16" y1="13" x2="8" y2="13"/>
             <line x1="16" y1="17" x2="8" y2="17"/>
-            <polyline points="10 9 9 9 8 9"/>
           </svg>
         </span>
         <span class="nav-label">Trading Rules</span>
         <span class="nav-badge" id="ruleBreakBadge" style="display:none">!</span>
       </a>
 
-      <a href="#" class="nav-item" data-page="goals">
-        <span class="nav-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
-          </svg>
-        </span>
-        <span class="nav-label">Goals</span>
-      </a>
-
-      <div class="nav-section-label">Mind & Body</div>
-
-      <a href="#" class="nav-item" data-page="reflection">
-        <span class="nav-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14z"/>
-            <path d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"/>
-          </svg>
-        </span>
-        <span class="nav-label">Reflection</span>
-      </a>
-
-      <a href="#" class="nav-item" data-page="mood">
-        <span class="nav-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-            <line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
-          </svg>
-        </span>
-        <span class="nav-label">Mood Tracker</span>
-      </a>
-
-      <a href="#" class="nav-item" data-page="notes">
-        <span class="nav-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/>
-            <line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
-          </svg>
-        </span>
-        <span class="nav-label">Notes</span>
-      </a>
-
-      <div class="nav-section-label">Performance</div>
+      <div class="nav-section-label">Reports</div>
 
       <a href="#" class="nav-item" data-page="analytics">
         <span class="nav-icon">
@@ -415,17 +383,17 @@
           <button class="qa-action-btn" data-page="habits">
             <span>✅</span> Habits
           </button>
-          <button class="qa-action-btn" data-page="reflection">
-            <span>📝</span> Reflect
-          </button>
-          <button class="qa-action-btn" data-page="mood">
-            <span>😊</span> Mood
-          </button>
           <button class="qa-action-btn" data-page="goals">
             <span>🎯</span> Goals
           </button>
           <button class="qa-action-btn" data-page="rules">
             <span>📋</span> Rules
+          </button>
+          <button class="qa-action-btn" data-page="analytics">
+            <span>📊</span> Analytics
+          </button>
+          <button class="qa-action-btn" data-page="backup">
+            <span>💾</span> Backup
           </button>
         </div>
 
@@ -569,9 +537,10 @@
           </div>
 
           <!-- TODAY'S CHECKLIST -->
-          <div class="dash-card daily-checklist-card">
+          <!-- TODAY'S CHECKLIST — ADVANCED -->
+          <div class="dash-card daily-checklist-card dash-card-wide">
             <div class="dash-card-header">
-              <h3 class="dash-card-title">Daily Checklist</h3>
+              <h3 class="dash-card-title">📋 Daily Checklist</h3>
               <div class="checklist-header-right">
                 <div class="checklist-progress-ring-wrap">
                   <svg width="36" height="36" viewBox="0 0 36 36">
@@ -583,75 +552,117 @@
                   </svg>
                   <span class="checklist-ring-pct" id="checklistRingPct">0%</span>
                 </div>
-                <span class="dash-card-badge" id="checklistCount">0/8</span>
+                <span class="dash-card-badge" id="checklistCount">0/10</span>
               </div>
             </div>
+
+            <!-- Progress Bar -->
             <div class="checklist-prog-bar-wrap">
               <div class="checklist-prog-bar">
                 <div class="checklist-prog-fill" id="checklistProgFill" style="width:0%"></div>
               </div>
             </div>
-            <div class="checklist-new" id="dailyChecklist">
-              <label class="check-item-new" data-key="morning_routine">
-                <input type="checkbox" data-key="morning_routine"/>
-                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
-                <span class="check-item-icon">🌅</span>
-                <span class="check-item-label">Morning Routine</span>
-                <span class="check-item-time">6:00 AM</span>
-              </label>
-              <label class="check-item-new" data-key="namaz">
-                <input type="checkbox" data-key="namaz"/>
-                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
-                <span class="check-item-icon">🤲</span>
-                <span class="check-item-label">Namaz / Prayer</span>
-                <span class="check-item-time">Fajr</span>
-              </label>
-              <label class="check-item-new" data-key="trade_analysis">
-                <input type="checkbox" data-key="trade_analysis"/>
-                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
-                <span class="check-item-icon">📈</span>
-                <span class="check-item-label">Forex Analysis</span>
-                <span class="check-item-time">Morning</span>
-              </label>
-              <label class="check-item-new" data-key="study_session">
-                <input type="checkbox" data-key="study_session"/>
-                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
-                <span class="check-item-icon">📚</span>
-                <span class="check-item-label">Study Session</span>
-                <span class="check-item-time">1hr+</span>
-              </label>
-              <label class="check-item-new" data-key="exercise">
-                <input type="checkbox" data-key="exercise"/>
-                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
-                <span class="check-item-icon">💪</span>
-                <span class="check-item-label">Exercise</span>
-                <span class="check-item-time">30min</span>
-              </label>
-              <label class="check-item-new" data-key="reading">
-                <input type="checkbox" data-key="reading"/>
-                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
-                <span class="check-item-icon">📖</span>
-                <span class="check-item-label">Reading</span>
-                <span class="check-item-time">30min</span>
-              </label>
-              <label class="check-item-new" data-key="journal_entry">
-                <input type="checkbox" data-key="journal_entry"/>
-                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
-                <span class="check-item-icon">📝</span>
-                <span class="check-item-label">Journal Entry</span>
-                <span class="check-item-time">Evening</span>
-              </label>
-              <label class="check-item-new" data-key="evening_review">
-                <input type="checkbox" data-key="evening_review"/>
-                <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
-                <span class="check-item-icon">🌙</span>
-                <span class="check-item-label">Evening Review</span>
-                <span class="check-item-time">Night</span>
-              </label>
+
+            <!-- Two column checklist -->
+            <div class="checklist-two-col">
+
+              <!-- LEFT COLUMN -->
+              <div class="checklist-col">
+                <div class="checklist-col-label">🌅 Morning</div>
+
+                <label class="check-item-new" data-key="namaz">
+                  <input type="checkbox" data-key="namaz"/>
+                  <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+                  <span class="check-item-icon">🤲</span>
+                  <span class="check-item-label">Namaz / Prayer</span>
+                  <span class="check-item-time">Fajr</span>
+                </label>
+
+                <label class="check-item-new" data-key="morning_routine">
+                  <input type="checkbox" data-key="morning_routine"/>
+                  <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+                  <span class="check-item-icon">🌅</span>
+                  <span class="check-item-label">Morning Routine</span>
+                  <span class="check-item-time">6 AM</span>
+                </label>
+
+                <label class="check-item-new" data-key="exercise">
+                  <input type="checkbox" data-key="exercise"/>
+                  <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+                  <span class="check-item-icon">💪</span>
+                  <span class="check-item-label">Exercise</span>
+                  <span class="check-item-time">30min</span>
+                </label>
+
+                <label class="check-item-new" data-key="reading">
+                  <input type="checkbox" data-key="reading"/>
+                  <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+                  <span class="check-item-icon">📖</span>
+                  <span class="check-item-label">Reading</span>
+                  <span class="check-item-time">30min</span>
+                </label>
+
+                <label class="check-item-new" data-key="study_session">
+                  <input type="checkbox" data-key="study_session"/>
+                  <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+                  <span class="check-item-icon">📚</span>
+                  <span class="check-item-label">Study Session</span>
+                  <span class="check-item-time">1hr+</span>
+                </label>
+              </div>
+
+              <!-- RIGHT COLUMN — TRADING ACTIONS -->
+              <div class="checklist-col">
+                <div class="checklist-col-label">📈 Trading & Goals</div>
+
+                <!-- Clickable action items -->
+                <label class="check-item-new check-item-action" data-key="trade_analysis" data-goto="forex">
+                  <input type="checkbox" data-key="trade_analysis"/>
+                  <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+                  <span class="check-item-icon">📈</span>
+                  <span class="check-item-label">Log Trade</span>
+                  <span class="check-item-goto">→ Journal</span>
+                </label>
+
+                <label class="check-item-new check-item-action" data-key="habits_done" data-goto="habits">
+                  <input type="checkbox" data-key="habits_done"/>
+                  <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+                  <span class="check-item-icon">✅</span>
+                  <span class="check-item-label">Check Habits</span>
+                  <span class="check-item-goto">→ Habits</span>
+                </label>
+
+                <label class="check-item-new check-item-action" data-key="goals_review" data-goto="goals">
+                  <input type="checkbox" data-key="goals_review"/>
+                  <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+                  <span class="check-item-icon">🎯</span>
+                  <span class="check-item-label">Review Goals</span>
+                  <span class="check-item-goto">→ Goals</span>
+                </label>
+
+                <label class="check-item-new check-item-action" data-key="rules_check" data-goto="rules">
+                  <input type="checkbox" data-key="rules_check"/>
+                  <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+                  <span class="check-item-icon">📋</span>
+                  <span class="check-item-label">Check Rules</span>
+                  <span class="check-item-goto">→ Rules</span>
+                </label>
+
+                <label class="check-item-new" data-key="evening_review">
+                  <input type="checkbox" data-key="evening_review"/>
+                  <span class="check-box-new"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+                  <span class="check-item-icon">🌙</span>
+                  <span class="check-item-label">Evening Review</span>
+                  <span class="check-item-time">Night</span>
+                </label>
+              </div>
+
             </div>
+
+            <!-- Completion Message -->
             <div class="checklist-complete-msg" id="checklistCompleteMsg" style="display:none">
               <span>🎉</span>
-              <strong>Perfect Day! All tasks done!</strong>
+              <strong>Perfect Day! All 10 tasks done! You are unstoppable!</strong>
             </div>
           </div>
 
@@ -1433,6 +1444,7 @@
       <!-- ===================== END REPORTS ===================== -->
 
       <!-- ===================== TRADING RULES PAGE ===================== -->
+      <!-- ===================== TRADING RULES PAGE — SIMPLE ===================== -->
       <section class="page" id="page-rules">
 
         <div class="page-header">
@@ -1440,105 +1452,94 @@
             <h1 class="page-title">Trading Rules</h1>
             <p class="page-subtitle">Your rules. Your edge. Never break them.</p>
           </div>
-          <div class="header-actions">
-            <button class="btn btn-ghost" id="openRuleBreakModal">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              Log Rule Break
-            </button>
-            <button class="btn btn-primary" id="openAddRuleModal">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              Add Rule
-            </button>
+          <button class="btn btn-primary" id="openAddRuleModal">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Rule
+          </button>
+        </div>
+
+        <!-- 3 SIMPLE STATS -->
+        <div class="simple-rules-stats">
+          <div class="srs-card srs-blue">
+            <div class="srs-val" id="rs_total">0</div>
+            <div class="srs-label">📋 Total Rules</div>
+          </div>
+          <div class="srs-card srs-red">
+            <div class="srs-val" id="rs_breaks">0</div>
+            <div class="srs-label">⚠️ Times Broken</div>
+          </div>
+          <div class="srs-card srs-green">
+            <div class="srs-val" id="rs_discipline">100%</div>
+            <div class="srs-label">✅ Discipline Rate</div>
           </div>
         </div>
 
-        <!-- RULES STATS -->
-        <div class="rules-stats-strip">
-          <div class="rstat-card">
-            <div class="rstat-val" id="rs_total">0</div>
-            <div class="rstat-label">Total Rules</div>
-          </div>
-          <div class="rstat-card">
-            <div class="rstat-val green" id="rs_active">0</div>
-            <div class="rstat-label">Active Rules</div>
-          </div>
-          <div class="rstat-card">
-            <div class="rstat-val red" id="rs_breaks">0</div>
-            <div class="rstat-label">Total Breaks</div>
-          </div>
-          <div class="rstat-card">
-            <div class="rstat-val accent" id="rs_this_week">0</div>
-            <div class="rstat-label">Breaks This Week</div>
-          </div>
-          <div class="rstat-card">
-            <div class="rstat-val accent2" id="rs_discipline">100%</div>
-            <div class="rstat-label">Discipline Rate</div>
-          </div>
-        </div>
+        <!-- 2 SECTIONS SIDE BY SIDE -->
+        <div class="rules-two-col">
 
-        <!-- TABS -->
-        <div class="rules-tabs">
-          <button class="rules-tab active" data-rtab="rules">📋 My Rules</button>
-          <button class="rules-tab" data-rtab="checklist">✅ Pre-Trade Checklist</button>
-          <button class="rules-tab" data-rtab="breaks">⚠️ Break Tracker</button>
-        </div>
+          <!-- LEFT: MY RULES -->
+          <div class="rules-section">
+            <div class="rules-section-header">
+              <h3 class="rules-section-title">📋 My Trading Rules</h3>
+              <span class="rules-section-sub">Follow these — always</span>
+            </div>
 
-        <!-- MY RULES TAB -->
-        <div class="rules-tab-content active" id="rtab-rules">
+            <!-- Category Pills -->
+            <div class="rules-cat-pills">
+              <button class="rule-pill active" data-rcat="all">All</button>
+              <button class="rule-pill" data-rcat="entry">📈 Entry</button>
+              <button class="rule-pill" data-rcat="exit">📉 Exit</button>
+              <button class="rule-pill" data-rcat="risk">⚖️ Risk</button>
+              <button class="rule-pill" data-rcat="psychology">🧠 Mind</button>
+            </div>
 
-          <!-- Category filter -->
-          <div class="category-filter" id="rulesCatFilter">
-            <button class="cat-btn active" data-rcat="all">All</button>
-            <button class="cat-btn" data-rcat="entry">📈 Entry</button>
-            <button class="cat-btn" data-rcat="exit">📉 Exit</button>
-            <button class="cat-btn" data-rcat="risk">⚖️ Risk</button>
-            <button class="cat-btn" data-rcat="psychology">🧠 Psychology</button>
-            <button class="cat-btn" data-rcat="general">⚡ General</button>
+            <div class="simple-rules-list" id="rulesList"></div>
+
+            <div class="rules-empty" id="rulesEmpty" style="display:none">
+              <span>📋</span>
+              <h3>No rules yet</h3>
+              <p>Click "Add Rule" to start building your trading playbook.</p>
+            </div>
           </div>
 
-          <div class="rules-list" id="rulesList"></div>
-
-          <div class="rules-empty" id="rulesEmpty" style="display:none">
-            <span>📋</span>
-            <h3>No rules yet</h3>
-            <p>Add your trading rules to build your personal playbook.</p>
-          </div>
-        </div>
-
-        <!-- PRE-TRADE CHECKLIST TAB -->
-        <div class="rules-tab-content" id="rtab-checklist">
-          <div class="pretrade-wrap">
-            <div class="pretrade-header">
-              <h3 class="section-title">Before Every Trade — Complete This</h3>
-              <div class="pretrade-actions">
+          <!-- RIGHT: PRE-TRADE CHECKLIST -->
+          <div class="rules-section">
+            <div class="rules-section-header">
+              <h3 class="rules-section-title">✅ Before Every Trade</h3>
+              <div style="display:flex;gap:6px">
                 <button class="btn btn-ghost btn-sm" id="resetChecklistBtn">Reset</button>
-                <button class="btn btn-primary btn-sm" id="addChecklistItemBtn">+ Add Item</button>
+                <button class="btn btn-ghost btn-sm" id="addChecklistItemBtn">+ Add</button>
               </div>
             </div>
+
+            <!-- Progress -->
             <div class="pretrade-progress-bar-wrap">
               <div class="pretrade-progress-bar">
                 <div class="pretrade-progress-fill" id="pretradeProgressFill" style="width:0%"></div>
               </div>
               <span class="pretrade-progress-pct" id="pretradeProgressPct">0%</span>
             </div>
+
             <div class="pretrade-list" id="pretradeList"></div>
 
             <div class="pretrade-result" id="pretradeResult" style="display:none">
               <div class="ptr-icon" id="ptrIcon">✅</div>
               <div class="ptr-text" id="ptrText">All checks passed! You may enter the trade.</div>
             </div>
+
+            <!-- Log Break -->
+            <button class="log-break-btn" id="openRuleBreakModal">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              I broke a rule today
+            </button>
           </div>
+
         </div>
 
-        <!-- BREAK TRACKER TAB -->
-        <div class="rules-tab-content" id="rtab-breaks">
-          <div class="breaks-summary" id="breaksSummary"></div>
+        <!-- BREAKS HISTORY -->
+        <div class="breaks-history" id="breaksHistory" style="display:none">
+          <h3 class="section-title" style="margin-bottom:14px">⚠️ Recent Rule Breaks</h3>
           <div class="breaks-list" id="breaksList"></div>
-          <div class="breaks-empty" id="breaksEmpty" style="display:none">
-            <span>🏆</span>
-            <h3>No rule breaks!</h3>
-            <p>Perfect discipline. Keep it up!</p>
-          </div>
         </div>
 
       </section>
