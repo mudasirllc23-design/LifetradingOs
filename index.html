@@ -1042,262 +1042,12 @@
       <!-- ===================== END GOALS ===================== -->
 
       <!-- ===================== REFLECTION PAGE ===================== -->
-      <section class="page" id="page-reflection">
-        <div class="page-header">
-          <div>
-            <h1 class="page-title">Daily Reflection</h1>
-            <p class="page-subtitle">Review your day. Extract lessons. Grow.</p>
-          </div>
-          <div class="header-actions">
-            <span class="reflection-date-badge" id="reflectionDateBadge"></span>
-            <button class="btn btn-primary" id="saveReflectionBtn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-              Save Today
-            </button>
-          </div>
-        </div>
-
-        <!-- REFLECTION FORM -->
-        <div class="reflection-grid">
-          <div class="reflection-card rc-went-well">
-            <div class="rc-header">
-              <span class="rc-icon">✅</span>
-              <h3 class="rc-title">What Went Well</h3>
-            </div>
-            <textarea class="rc-textarea" id="rf_went_well" placeholder="List the wins, successes, and positive moments from today..."></textarea>
-          </div>
-
-          <div class="reflection-card rc-went-wrong">
-            <div class="rc-header">
-              <span class="rc-icon">⚠️</span>
-              <h3 class="rc-title">What Went Wrong</h3>
-            </div>
-            <textarea class="rc-textarea" id="rf_went_wrong" placeholder="Be honest. What didn't go as planned today?"></textarea>
-          </div>
-
-          <div class="reflection-card rc-lessons">
-            <div class="rc-header">
-              <span class="rc-icon">💡</span>
-              <h3 class="rc-title">Lessons Learned</h3>
-            </div>
-            <textarea class="rc-textarea" id="rf_lessons" placeholder="What did you learn today? From trading, life, reading?"></textarea>
-          </div>
-
-          <div class="reflection-card rc-improvements">
-            <div class="rc-header">
-              <span class="rc-icon">🚀</span>
-              <h3 class="rc-title">Tomorrow's Improvements</h3>
-            </div>
-            <textarea class="rc-textarea" id="rf_improvements" placeholder="What will you do better tomorrow?"></textarea>
-          </div>
-
-          <div class="reflection-card rc-gratitude rc-full-width">
-            <div class="rc-header">
-              <span class="rc-icon">🙏</span>
-              <h3 class="rc-title">Gratitude Notes</h3>
-            </div>
-            <textarea class="rc-textarea rc-textarea-sm" id="rf_gratitude" placeholder="List 3 things you're grateful for today..."></textarea>
-          </div>
-
-          <!-- DAILY SCORES -->
-          <div class="reflection-card rc-full-width">
-            <div class="rc-header">
-              <span class="rc-icon">📊</span>
-              <h3 class="rc-title">Day Ratings</h3>
-            </div>
-            <div class="day-ratings-grid">
-              <div class="day-rating-item">
-                <label class="rating-label">Overall Day</label>
-                <div class="rating-stars" data-field="rf_overall">
-                  <button class="star-btn" data-val="1">★</button><button class="star-btn" data-val="2">★</button>
-                  <button class="star-btn" data-val="3">★</button><button class="star-btn" data-val="4">★</button>
-                  <button class="star-btn" data-val="5">★</button>
-                </div>
-                <input type="hidden" id="rf_overall" value="0"/>
-              </div>
-              <div class="day-rating-item">
-                <label class="rating-label">Productivity</label>
-                <div class="rating-stars" data-field="rf_productivity">
-                  <button class="star-btn" data-val="1">★</button><button class="star-btn" data-val="2">★</button>
-                  <button class="star-btn" data-val="3">★</button><button class="star-btn" data-val="4">★</button>
-                  <button class="star-btn" data-val="5">★</button>
-                </div>
-                <input type="hidden" id="rf_productivity" value="0"/>
-              </div>
-              <div class="day-rating-item">
-                <label class="rating-label">Trading Focus</label>
-                <div class="rating-stars" data-field="rf_trading">
-                  <button class="star-btn" data-val="1">★</button><button class="star-btn" data-val="2">★</button>
-                  <button class="star-btn" data-val="3">★</button><button class="star-btn" data-val="4">★</button>
-                  <button class="star-btn" data-val="5">★</button>
-                </div>
-                <input type="hidden" id="rf_trading" value="0"/>
-              </div>
-              <div class="day-rating-item">
-                <label class="rating-label">Discipline</label>
-                <div class="rating-stars" data-field="rf_discipline">
-                  <button class="star-btn" data-val="1">★</button><button class="star-btn" data-val="2">★</button>
-                  <button class="star-btn" data-val="3">★</button><button class="star-btn" data-val="4">★</button>
-                  <button class="star-btn" data-val="5">★</button>
-                </div>
-                <input type="hidden" id="rf_discipline" value="0"/>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- PAST REFLECTIONS -->
-        <div class="past-reflections">
-          <h3 class="section-title" style="margin-top:28px">Past Reflections</h3>
-          <div class="past-ref-list" id="pastReflectionsList"></div>
-        </div>
-      </section>
       <!-- ===================== END REFLECTION ===================== -->
 
       <!-- ===================== MOOD PAGE ===================== -->
-      <section class="page" id="page-mood">
-        <div class="page-header">
-          <div>
-            <h1 class="page-title">Mood Tracker</h1>
-            <p class="page-subtitle">Track how you feel. Spot your patterns.</p>
-          </div>
-          <button class="btn btn-primary" id="saveMoodBtn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-            Save Today's Mood
-          </button>
-        </div>
-
-        <!-- TODAY'S MOOD ENTRY -->
-        <div class="mood-entry-card">
-          <h3 class="section-title">Today's Check-In</h3>
-
-          <!-- MOOD SELECTOR -->
-          <div class="mood-section">
-            <label class="mood-section-label">Overall Mood</label>
-            <div class="mood-selector" id="moodSelector">
-              <button class="mood-face" data-mood="5" data-label="Amazing">😄<span>Amazing</span></button>
-              <button class="mood-face" data-mood="4" data-label="Good">😊<span>Good</span></button>
-              <button class="mood-face" data-mood="3" data-label="Neutral">😐<span>Neutral</span></button>
-              <button class="mood-face" data-mood="2" data-label="Bad">😟<span>Bad</span></button>
-              <button class="mood-face" data-mood="1" data-label="Terrible">😢<span>Terrible</span></button>
-            </div>
-            <input type="hidden" id="moodValue" value="0"/>
-          </div>
-
-          <!-- SLIDERS -->
-          <div class="mood-sliders-grid">
-            <div class="mood-slider-item">
-              <div class="mood-slider-header">
-                <label class="mood-section-label">⚡ Energy Level</label>
-                <span class="mood-slider-val" id="energyVal">5</span>
-              </div>
-              <input type="range" class="score-slider mood-range" id="moodEnergy" min="1" max="10" value="5"/>
-            </div>
-            <div class="mood-slider-item">
-              <div class="mood-slider-header">
-                <label class="mood-section-label">😤 Stress Level</label>
-                <span class="mood-slider-val" id="stressVal">5</span>
-              </div>
-              <input type="range" class="score-slider mood-range" id="moodStress" min="1" max="10" value="5"/>
-            </div>
-            <div class="mood-slider-item">
-              <div class="mood-slider-header">
-                <label class="mood-section-label">🔥 Motivation</label>
-                <span class="mood-slider-val" id="motivationVal">5</span>
-              </div>
-              <input type="range" class="score-slider mood-range" id="moodMotivation" min="1" max="10" value="5"/>
-            </div>
-            <div class="mood-slider-item">
-              <div class="mood-slider-header">
-                <label class="mood-section-label">🎯 Focus Level</label>
-                <span class="mood-slider-val" id="focusVal">5</span>
-              </div>
-              <input type="range" class="score-slider mood-range" id="moodFocus" min="1" max="10" value="5"/>
-            </div>
-          </div>
-
-          <!-- HEALTH METRICS -->
-          <div class="health-metrics-grid">
-            <div class="health-metric">
-              <div class="hm-icon">💧</div>
-              <label class="mood-section-label">Water (glasses)</label>
-              <input type="number" class="form-input hm-input" id="moodWater" min="0" max="20" value="0" placeholder="0"/>
-            </div>
-            <div class="health-metric">
-              <div class="hm-icon">😴</div>
-              <label class="mood-section-label">Sleep (hours)</label>
-              <input type="number" class="form-input hm-input" id="moodSleep" min="0" max="24" step="0.5" value="0" placeholder="0"/>
-            </div>
-            <div class="health-metric">
-              <div class="hm-icon">🏃</div>
-              <label class="mood-section-label">Exercise (min)</label>
-              <input type="number" class="form-input hm-input" id="moodExercise" min="0" max="300" value="0" placeholder="0"/>
-            </div>
-            <div class="health-metric">
-              <div class="hm-icon">📚</div>
-              <label class="mood-section-label">Study (hours)</label>
-              <input type="number" class="form-input hm-input" id="moodStudy" min="0" max="24" step="0.5" value="0" placeholder="0"/>
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top:16px">
-            <label class="form-label">Mood Note (optional)</label>
-            <textarea class="form-input form-textarea" id="moodNote" rows="2" placeholder="Anything specific affecting your mood today?"></textarea>
-          </div>
-        </div>
-
-        <!-- MOOD HISTORY -->
-        <div class="mood-history-section">
-          <h3 class="section-title" style="margin-top:28px;margin-bottom:16px">Last 7 Days</h3>
-          <div class="mood-week-chart" id="moodWeekChart"></div>
-        </div>
-
-        <!-- MOOD LOG -->
-        <div class="mood-log-section">
-          <h3 class="section-title" style="margin-top:28px;margin-bottom:16px">Mood History</h3>
-          <div class="mood-log-list" id="moodLogList"></div>
-        </div>
-      </section>
       <!-- ===================== END MOOD ===================== -->
 
       <!-- ===================== NOTES PAGE ===================== -->
-      <section class="page" id="page-notes">
-        <div class="page-header">
-          <div>
-            <h1 class="page-title">Notes</h1>
-            <p class="page-subtitle">Capture ideas. Record knowledge. Stay sharp.</p>
-          </div>
-          <button class="btn btn-primary" id="openAddNoteModal">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            New Note
-          </button>
-        </div>
-
-        <!-- SEARCH BAR -->
-        <div class="notes-search-wrap">
-          <div class="notes-search-box">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" class="notes-search-input" id="notesSearch" placeholder="Search notes..."/>
-          </div>
-          <div class="notes-cat-filter">
-            <button class="cat-btn active" data-ncat="all">All</button>
-            <button class="cat-btn" data-ncat="quick">⚡ Quick</button>
-            <button class="cat-btn" data-ncat="learning">📚 Learning</button>
-            <button class="cat-btn" data-ncat="forex">📈 Forex</button>
-            <button class="cat-btn" data-ncat="personal">💫 Personal</button>
-          </div>
-        </div>
-
-        <!-- NOTES GRID -->
-        <div class="notes-grid" id="notesGrid"></div>
-
-        <!-- NOTES EMPTY -->
-        <div class="notes-empty" id="notesEmpty" style="display:none">
-          <span>📓</span>
-          <h3>No notes yet</h3>
-          <p>Click "New Note" to capture your first thought.</p>
-        </div>
-      </section>
       <!-- ===================== END NOTES ===================== -->
 
       <!-- ===================== ANALYTICS PAGE ===================== -->
@@ -1449,8 +1199,8 @@
 
         <div class="page-header">
           <div>
-            <h1 class="page-title">Trading Rules</h1>
-            <p class="page-subtitle">Your rules. Your edge. Never break them.</p>
+            <h1 class="page-title">Trading Playbook</h1>
+            <p class="page-subtitle">One place for your rules. Check them off every trade.</p>
           </div>
           <button class="btn btn-primary" id="openAddRuleModal">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -1458,87 +1208,57 @@
           </button>
         </div>
 
-        <!-- 3 SIMPLE STATS -->
-        <div class="simple-rules-stats">
-          <div class="srs-card srs-blue">
-            <div class="srs-val" id="rs_total">0</div>
-            <div class="srs-label">📋 Total Rules</div>
+        <!-- DISCIPLINE SCORE — the single number that matters -->
+        <div class="discipline-hero" id="disciplineHero">
+          <div class="dh-ring-wrap">
+            <svg class="dh-ring" viewBox="0 0 120 120">
+              <circle class="dh-ring-bg" cx="60" cy="60" r="50"/>
+              <circle class="dh-ring-fill" id="dhRingFill" cx="60" cy="60" r="50"
+                stroke-dasharray="314.16" stroke-dashoffset="314.16"
+                transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="dh-ring-label">
+              <span class="dh-ring-pct" id="dhRingPct">—</span>
+              <span class="dh-ring-sub">today</span>
+            </div>
           </div>
-          <div class="srs-card srs-red">
-            <div class="srs-val" id="rs_breaks">0</div>
-            <div class="srs-label">⚠️ Times Broken</div>
-          </div>
-          <div class="srs-card srs-green">
-            <div class="srs-val" id="rs_discipline">100%</div>
-            <div class="srs-label">✅ Discipline Rate</div>
+          <div class="dh-info">
+            <div class="dh-title" id="dhTitle">Add your first rule to get started</div>
+            <div class="dh-stats-row">
+              <div class="dh-stat"><span class="dh-stat-val" id="dh_total">0</span><span class="dh-stat-label">Rules</span></div>
+              <div class="dh-stat"><span class="dh-stat-val color-green" id="dh_followed">0</span><span class="dh-stat-label">Followed Today</span></div>
+              <div class="dh-stat"><span class="dh-stat-val color-red" id="dh_broken">0</span><span class="dh-stat-label">Broken Today</span></div>
+              <div class="dh-stat"><span class="dh-stat-val" id="dh_streak">0</span><span class="dh-stat-label">🔥 Clean Days</span></div>
+            </div>
           </div>
         </div>
 
-        <!-- 2 SECTIONS SIDE BY SIDE -->
-        <div class="rules-two-col">
-
-          <!-- LEFT: MY RULES -->
-          <div class="rules-section">
-            <div class="rules-section-header">
-              <h3 class="rules-section-title">📋 My Trading Rules</h3>
-              <span class="rules-section-sub">Follow these — always</span>
-            </div>
-
-            <!-- Category Pills -->
-            <div class="rules-cat-pills">
-              <button class="rule-pill active" data-rcat="all">All</button>
-              <button class="rule-pill" data-rcat="entry">📈 Entry</button>
-              <button class="rule-pill" data-rcat="exit">📉 Exit</button>
-              <button class="rule-pill" data-rcat="risk">⚖️ Risk</button>
-              <button class="rule-pill" data-rcat="psychology">🧠 Mind</button>
-            </div>
-
-            <div class="simple-rules-list" id="rulesList"></div>
-
-            <div class="rules-empty" id="rulesEmpty" style="display:none">
-              <span>📋</span>
-              <h3>No rules yet</h3>
-              <p>Click "Add Rule" to start building your trading playbook.</p>
-            </div>
+        <!-- EMPTY STATE — first time only -->
+        <div class="playbook-empty" id="playbookEmpty" style="display:none">
+          <span>📋</span>
+          <h3>Your playbook is empty</h3>
+          <p>Add the rules you trade by. Each one becomes a daily check-in — tap to mark it followed or broken, no separate checklist needed.</p>
+          <div class="playbook-empty-actions">
+            <button class="btn btn-primary" id="emptyAddRuleBtn">+ Write My First Rule</button>
+            <button class="btn btn-ghost" id="useStarterRulesBtn">⚡ Use 5 Starter Rules</button>
           </div>
-
-          <!-- RIGHT: PRE-TRADE CHECKLIST -->
-          <div class="rules-section">
-            <div class="rules-section-header">
-              <h3 class="rules-section-title">✅ Before Every Trade</h3>
-              <div style="display:flex;gap:6px">
-                <button class="btn btn-ghost btn-sm" id="resetChecklistBtn">Reset</button>
-                <button class="btn btn-ghost btn-sm" id="addChecklistItemBtn">+ Add</button>
-              </div>
-            </div>
-
-            <!-- Progress -->
-            <div class="pretrade-progress-bar-wrap">
-              <div class="pretrade-progress-bar">
-                <div class="pretrade-progress-fill" id="pretradeProgressFill" style="width:0%"></div>
-              </div>
-              <span class="pretrade-progress-pct" id="pretradeProgressPct">0%</span>
-            </div>
-
-            <div class="pretrade-list" id="pretradeList"></div>
-
-            <div class="pretrade-result" id="pretradeResult" style="display:none">
-              <div class="ptr-icon" id="ptrIcon">✅</div>
-              <div class="ptr-text" id="ptrText">All checks passed! You may enter the trade.</div>
-            </div>
-
-            <!-- Log Break -->
-            <button class="log-break-btn" id="openRuleBreakModal">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              I broke a rule today
-            </button>
-          </div>
-
         </div>
 
-        <!-- BREAKS HISTORY -->
+        <!-- CATEGORY FILTER -->
+        <div class="rules-cat-pills" id="rulesCatPillsWrap" style="display:none">
+          <button class="rule-pill active" data-rcat="all">All</button>
+          <button class="rule-pill" data-rcat="entry">📈 Entry</button>
+          <button class="rule-pill" data-rcat="exit">📉 Exit</button>
+          <button class="rule-pill" data-rcat="risk">⚖️ Risk</button>
+          <button class="rule-pill" data-rcat="psychology">🧠 Mind</button>
+        </div>
+
+        <!-- PLAYBOOK — each rule IS the checklist item -->
+        <div class="playbook-list" id="playbookList"></div>
+
+        <!-- HISTORY -->
         <div class="breaks-history" id="breaksHistory" style="display:none">
-          <h3 class="section-title" style="margin-bottom:14px">⚠️ Recent Rule Breaks</h3>
+          <h3 class="section-title" style="margin-bottom:14px">⚠️ Recent Slip-Ups</h3>
           <div class="breaks-list" id="breaksList"></div>
         </div>
 
@@ -2265,22 +1985,21 @@
   <div class="modal-overlay" id="ruleBreakModalOverlay">
     <div class="modal" id="ruleBreakModal">
       <div class="modal-header">
-        <h3 class="modal-title">Log Rule Break ⚠️</h3>
+        <h3 class="modal-title">Log Slip-Up ⚠️</h3>
         <button class="modal-close" id="closeRuleBreakModal">&times;</button>
       </div>
       <div class="modal-body">
-        <div class="form-group">
-          <label class="form-label">Which Rule Did You Break? *</label>
-          <select class="form-input" id="breakRuleSelect">
-            <option value="">Select a rule...</option>
-          </select>
+        <div class="break-rule-display" id="breakRuleDisplay">
+          <span class="brd-icon">📋</span>
+          <span class="brd-text" id="breakRuleName">Rule name</span>
         </div>
+        <input type="hidden" id="breakRuleSelect"/>
         <div class="form-group">
           <label class="form-label">Date</label>
           <input type="date" class="form-input" id="breakDate"/>
         </div>
         <div class="form-group">
-          <label class="form-label">What Happened?</label>
+          <label class="form-label">What Happened? (optional)</label>
           <textarea class="form-input form-textarea" id="breakDescription" rows="3" placeholder="Describe what happened and why you broke the rule..."></textarea>
         </div>
         <div class="form-group">
@@ -2297,44 +2016,24 @@
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Lesson Learned</label>
+          <label class="form-label">Lesson Learned (optional)</label>
           <textarea class="form-input form-textarea" id="breakLesson" rows="2" placeholder="What will you do differently next time?"></textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-ghost" id="cancelRuleBreakModal">Cancel</button>
-        <button class="btn btn-danger" id="saveRuleBreakBtn">Log Break</button>
+        <button class="btn btn-danger" id="saveRuleBreakBtn">Log It</button>
       </div>
     </div>
   </div>
 
   <!-- ADD CHECKLIST ITEM MODAL -->
-  <div class="modal-overlay" id="checklistItemModalOverlay">
-    <div class="modal modal-sm">
-      <div class="modal-header">
-        <h3 class="modal-title">Add Checklist Item</h3>
-        <button class="modal-close" id="closeChecklistItemModal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label class="form-label">Checklist Item *</label>
-          <input type="text" class="form-input" id="checklistItemText" placeholder="e.g. HTF trend confirmed?" maxlength="100"/>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-ghost" id="cancelChecklistItemModal">Cancel</button>
-        <button class="btn btn-primary" id="saveChecklistItemBtn">Add Item</button>
-      </div>
-    </div>
-  </div>
-
   <!-- JS MODULES -->
   <script src="js/storage.js"></script>
   <script src="js/dashboard.js"></script>
   <script src="js/habits.js"></script>
   <script src="js/forex.js"></script>
   <script src="js/goals.js"></script>
-  <script src="js/notes.js"></script>
   <script src="js/analytics.js"></script>
   <script src="js/reports.js"></script>
   <script src="js/backup.js"></script>

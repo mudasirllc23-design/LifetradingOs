@@ -142,13 +142,20 @@ const Goals = (() => {
         <div class="goal-prog-header">
           <span class="goal-prog-label">Progress</span>
           <div class="goal-prog-controls">
-            <button class="prog-btn minus" data-action="decrement" data-id="${g.id}">−</button>
-            <span class="goal-prog-pct" style="color:${cfg.color}">${prog}%</span>
-            <button class="prog-btn plus" data-action="increment" data-id="${g.id}">+</button>
+            <button class="prog-btn minus" data-action="decrement" data-id="${g.id}" title="-1%">−</button>
+            <input type="number" class="goal-prog-input" data-action="set-progress" data-id="${g.id}" value="${prog}" min="0" max="100" style="color:${cfg.color}"/>
+            <span class="goal-prog-pct-sign">%</span>
+            <button class="prog-btn plus" data-action="increment" data-id="${g.id}" title="+1%">+</button>
           </div>
         </div>
         <div class="goal-prog-bar">
           <div class="goal-prog-fill" style="width:${prog}%;background:${cfg.color}"></div>
+        </div>
+        <div class="goal-prog-quick">
+          <button class="prog-quick-btn" data-action="quick-add" data-id="${g.id}" data-val="5">+5%</button>
+          <button class="prog-quick-btn" data-action="quick-add" data-id="${g.id}" data-val="10">+10%</button>
+          <button class="prog-quick-btn" data-action="quick-add" data-id="${g.id}" data-val="15">+15%</button>
+          <button class="prog-quick-btn" data-action="quick-add" data-id="${g.id}" data-val="20">+20%</button>
         </div>
       </div>
 
@@ -166,9 +173,30 @@ const Goals = (() => {
     document.querySelectorAll('[data-action="delete-goal"]').forEach(btn =>
       btn.addEventListener('click', e => openDeleteModal(e.currentTarget.dataset.id)));
     document.querySelectorAll('[data-action="increment"]').forEach(btn =>
-      btn.addEventListener('click', e => adjustProgress(e.currentTarget.dataset.id, 10)));
+      btn.addEventListener('click', e => adjustProgress(e.currentTarget.dataset.id, 1)));
     document.querySelectorAll('[data-action="decrement"]').forEach(btn =>
-      btn.addEventListener('click', e => adjustProgress(e.currentTarget.dataset.id, -10)));
+      btn.addEventListener('click', e => adjustProgress(e.currentTarget.dataset.id, -1)));
+
+    // Direct % input — type any exact number (1%, 2%, 37%, etc.)
+    document.querySelectorAll('[data-action="set-progress"]').forEach(input => {
+      input.addEventListener('change', e => {
+        const val = parseInt(e.target.value, 10);
+        setProgress(e.target.dataset.id, isNaN(val) ? 0 : val);
+      });
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') e.target.blur();
+      });
+      // Prevent the click on the input from doing anything weird
+      input.addEventListener('click', e => e.stopPropagation());
+    });
+
+    // Quick-add buttons — +5%, +10%, +15%, +20% (relative, added to current progress)
+    document.querySelectorAll('[data-action="quick-add"]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const delta = parseInt(e.currentTarget.dataset.val, 10);
+        adjustProgress(e.currentTarget.dataset.id, delta);
+      });
+    });
   }
 
   function adjustProgress(id, delta) {
@@ -176,6 +204,18 @@ const Goals = (() => {
     if (!g) return;
     g.progress = Math.min(100, Math.max(0, (g.progress || 0) + delta));
     if (g.progress === 100) {
+      Storage.addActivity({ icon: '🏆', text: `Goal completed: ${g.title}`, color: '#34d399' });
+    }
+    saveAndRefresh();
+  }
+
+  function setProgress(id, value) {
+    const g = goals.find(g => g.id === id);
+    if (!g) return;
+    const clamped = Math.min(100, Math.max(0, value));
+    const wasIncomplete = (g.progress || 0) < 100;
+    g.progress = clamped;
+    if (clamped === 100 && wasIncomplete) {
       Storage.addActivity({ icon: '🏆', text: `Goal completed: ${g.title}`, color: '#34d399' });
     }
     saveAndRefresh();
